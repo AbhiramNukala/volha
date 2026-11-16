@@ -1,0 +1,36 @@
+---
+import Section from "./Section.astro";
+import { skills } from "../data";
+---
+
+<Section id="about" kicker="About" title="Background & Focus">
+  <div class="space-y-4 font-sans">
+    <div class="space-y-2 text-neutral-800 dark:text-neutral-300 text-xs sm:text-sm leading-snug font-sans">
+      <p>
+        I am a software engineer at Mindwave AI Solutions in Hyderabad, building production React.js web apps and React Native iOS and Android apps. My day-to-day includes building internal dashboards, implementing role-based access control, integrating payment gateways, and managing app store releases.
+      </p>
+      <p>
+        I am comfortable across the full frontend and mobile stack — from UI components and client state architectures down to native modules. When JavaScript bridges become a performance bottleneck, I write native C++ Nitro Modules with JSI to enable direct memory access without serialization overhead.
+      </p>
+    </div>
+
+    <!-- Skills Directory (No cards/boxes) -->
+    <div class="pt-2 space-y-2 font-sans">
+      <p class="font-sans text-[10px] sm:text-[11px] uppercase tracking-widest text-neutral-500 font-medium">
+        Technical Arsenal
+      </p>
+      <div class="grid sm:grid-cols-2 gap-x-6 gap-y-2.5 text-xs sm:text-sm font-sans">
+        {Object.entries(skills).map(([group, items]) => (
+          <div class="pt-2 border-t border-dotted border-neutral-400 dark:border-neutral-700">
+            <span class="font-sans text-[11px] sm:text-xs text-neutral-900 dark:text-neutral-200 block mb-0.5 font-medium tracking-wide">
+              {group}
+            </span>
+            <p class="font-sans text-xs sm:text-sm text-neutral-700 dark:text-neutral-400 leading-snug">
+              {items.join(", ")}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Section>

@@ -1,0 +1,70 @@
+---
+import Section from "./Section.astro";
+import { services } from "../data";
+import { ArrowRight, Circle } from "lucide-astro";
+---
+
+<Section id="services" kicker="Collaboration" title="Services & Engagement">
+    <div class="space-y-4 font-sans">
+        <div>
+            <p class="text-neutral-800 dark:text-neutral-300 text-xs sm:text-sm leading-snug max-w-2xl">
+                I partner with founders, product teams, and engineering leaders
+                to design, build, and ship production-ready client applications.
+                Because every project has unique technical requirements and
+                timelines, pricing is scoped dynamically after a brief discovery
+                call.
+            </p>
+        </div>
+
+        <!-- Services breakdown in clean unboxed layout -->
+        <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 pt-1">
+            {services.map((service) => (
+                <div class="space-y-2 font-sans pt-2.5 border-t border-dotted border-neutral-400 dark:border-neutral-700">
+                    <div>
+                        <span class="font-sans text-[11px] sm:text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-medium">
+                            {service.label}
+                        </span>
+                        <h3 class="font-serif text-lg sm:text-xl font-normal text-neutral-950 dark:text-white mt-0.5">
+                            {service.title}
+                        </h3>
+                        <p class="mt-1 text-xs sm:text-sm text-neutral-700 dark:text-neutral-400 leading-snug">
+                            {service.description}
+                        </p>
+                    </div>
+
+                    <!-- Deliverables -->
+                    <ul class="space-y-1.5 text-xs sm:text-sm text-neutral-700 dark:text-neutral-400 font-sans pt-0.5">
+                        {service.deliverables.map((item) => (
+                            <li class="flex items-start gap-2">
+                                <Circle class="size-2 text-neutral-400 dark:text-neutral-500 mt-1.5 shrink-0" />
+                                <span>{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
+        </div>
+
+        <!-- "Let's Discuss Pricing" Callout (No card, pure editorial) -->
+        <div class="pt-3.5 border-t border-dotted border-neutral-400 dark:border-neutral-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+                <h4 class="font-serif text-base sm:text-lg font-normal text-neutral-950 dark:text-white">
+                    Have a project in mind? Let's discuss pricing.
+                </h4>
+                <p class="text-xs sm:text-sm text-neutral-700 dark:text-neutral-400 mt-0.5 leading-snug max-w-xl">
+                    We'll review your feature roadmap, architecture needs, and
+                    timeline to put together a transparent, fixed-milestone
+                    proposal or sprint retainer.
+                </p>
+            </div>
+
+            <a
+                href="#contact"
+                class="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 transition-colors underline underline-offset-4 decoration-neutral-300 hover:decoration-orange-500 dark:decoration-neutral-700 dark:hover:decoration-orange-400 shrink-0 group py-0.5"
+            >
+                <span>Discuss pricing &amp; scope</span>
+                <ArrowRight class="size-3 text-neutral-400 group-hover:text-orange-600 dark:text-neutral-500 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 transition-all" />
+            </a>
+        </div>
+    </div>
+</Section>

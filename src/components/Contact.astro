@@ -1,0 +1,78 @@
+---
+import Section from "./Section.astro";
+import { links } from "../data";
+import { ArrowUpRight, Dot, Copy, Check } from "lucide-astro";
+---
+
+<Section id="contact" kicker="Contact" title="Get in Touch">
+    <div class="space-y-3.5 max-w-xl font-sans">
+        <p class="font-sans text-neutral-800 dark:text-neutral-300 text-xs sm:text-sm leading-snug">
+            Have a project in mind, need a mobile app shipped, or want to
+            discuss React Native performance and C++ JSI? Send an email — I
+            usually reply within a day.
+        </p>
+
+        <!-- Email Direct Display (No card/box) -->
+        <div class="space-y-1 pt-0.5">
+            <span class="text-[11px] text-neutral-500 uppercase tracking-wider block font-medium">
+                Direct Email
+            </span>
+            <div class="flex flex-wrap items-baseline gap-2.5">
+                <a
+                    href={`mailto:${links.email}`}
+                    class="font-serif text-xl sm:text-2xl font-normal text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 underline underline-offset-4 decoration-neutral-300 hover:decoration-orange-500 dark:decoration-neutral-700 dark:hover:decoration-orange-400 transition-colors break-all"
+                >
+                    {links.email}
+                </a>
+
+                <button
+                    type="button"
+                    data-copy={links.email}
+                    class="p-1 rounded text-neutral-400 hover:text-orange-600 hover:bg-neutral-100 dark:text-neutral-500 dark:hover:text-orange-400 dark:hover:bg-neutral-800 transition-colors cursor-pointer group"
+                    title="Copy email to clipboard"
+                    aria-label="Copy email address"
+                >
+                    <span class="copy-icon inline-flex items-center">
+                        <Copy class="size-4 copy-default" />
+                        <Check class="size-4 text-emerald-500 dark:text-emerald-400 copy-success hidden" />
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Socials & Meta with Lucide Icons -->
+        <div class="pt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs font-sans text-neutral-700 dark:text-neutral-400">
+            <a
+                href={links.github}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-0.5 text-neutral-700 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors group"
+            >
+                <span>GitHub</span>
+                <ArrowUpRight class="size-3 text-neutral-400 dark:text-neutral-500 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            </a>
+            <Dot class="size-4 -mx-1.5 text-neutral-400 dark:text-neutral-600 shrink-0" />
+            <a
+                href={links.linkedin}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-0.5 text-neutral-700 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors group"
+            >
+                <span>LinkedIn</span>
+                <ArrowUpRight class="size-3 text-neutral-400 dark:text-neutral-500 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            </a>
+            <Dot class="size-4 -mx-1.5 text-neutral-400 dark:text-neutral-600 shrink-0" />
+            <a
+                href={links.npm}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-0.5 text-neutral-700 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors group"
+            >
+                <span>npm</span>
+                <ArrowUpRight class="size-3 text-neutral-400 dark:text-neutral-500 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            </a>
+            <Dot class="size-4 -mx-1.5 text-neutral-400 dark:text-neutral-600 shrink-0" />
+            <span class="text-neutral-500">Hyderabad, India (IST)</span>
+        </div>
+    </div>
+</Section>

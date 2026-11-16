@@ -1,0 +1,228 @@
+---
+import "../styles/global.css";
+import { links } from "../data";
+
+const title = "Nukala Abhiram — React & React Native Engineer";
+const description =
+    "Software engineer with 2.7 years building production React.js web apps and React Native iOS/Android apps in TypeScript. Open-source C++/JSI module author.";
+const url = Astro.site?.href ?? "https://abhiramnukala.netlify.app";
+const ogImage = new URL(
+    "/og-image.png",
+    Astro.site ?? "https://abhiramnukala.netlify.app",
+).href;
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "@id": `${url}#person`,
+            name: "Nukala Abhiram",
+            jobTitle: "Software Engineer",
+            url,
+            image: ogImage,
+            email: `mailto:${links.email}`,
+            address: {
+                "@type": "PostalAddress",
+                addressLocality: "Hyderabad",
+                addressRegion: "Telangana",
+                addressCountry: "IN",
+            },
+            worksFor: {
+                "@type": "Organization",
+                name: "Mindwave AI Solutions",
+            },
+            sameAs: [links.github, links.linkedin, links.npm],
+            knowsAbout: [
+                "React Native",
+                "React.js",
+                "TypeScript",
+                "JavaScript",
+                "C++",
+                "JSI",
+                "Nitro Modules",
+                "Expo",
+                "Hermes Engine",
+                "Redux Toolkit",
+                "RTK Query",
+                "Mobile App Architecture",
+            ],
+        },
+        {
+            "@type": "WebSite",
+            "@id": `${url}#website`,
+            url,
+            name: title,
+            description,
+            publisher: {
+                "@id": `${url}#person`,
+            },
+            inLanguage: "en-US",
+        },
+    ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+        />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="author" content="Nukala Abhiram" />
+        <meta
+            name="keywords"
+            content="Nukala Abhiram, React Native Engineer, React Developer, TypeScript, C++, JSI, Nitro Modules, Expo, Mobile App Developer, Hyderabad, India"
+        />
+        <meta
+            name="robots"
+            content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+        <link rel="canonical" href={url} />
+
+        <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={url} />
+        <meta property="og:site_name" content="Nukala Abhiram" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:secure_url" content={ogImage} />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta
+            property="og:image:alt"
+            content="Nukala Abhiram — React & React Native Software Engineer"
+        />
+
+        <!-- Twitter / X Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={url} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage} />
+        <meta
+            name="twitter:image:alt"
+            content="Nukala Abhiram — React & React Native Software Engineer"
+        />
+
+        <meta name="theme-color" content="#ffffff" id="meta-theme-color" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <script
+            type="application/ld+json"
+            is:inline
+            set:html={JSON.stringify(jsonLd)}
+        />
+        <script
+            is:inline
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-Q8LPP4463N"
+        ></script>
+        <script is:inline>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-Q8LPP4463N");
+        </script>
+        <script is:inline>
+            (function () {
+                try {
+                    const stored = localStorage.getItem("theme");
+                    const meta = document.getElementById("meta-theme-color");
+                    if (stored === "dark") {
+                        document.documentElement.classList.add("dark");
+                        if (meta) meta.setAttribute("content", "#09090b");
+                    } else {
+                        document.documentElement.classList.remove("dark");
+                        if (meta) meta.setAttribute("content", "#ffffff");
+                    }
+                } catch (_) {}
+            })();
+        </script>
+    </head>
+    <body class="bg-white dark:bg-[#09090b] text-neutral-900 dark:text-neutral-100 antialiased selection:bg-orange-500/20 selection:text-orange-700 dark:selection:bg-neutral-800 dark:selection:text-white transition-colors duration-200 min-h-screen flex flex-col">
+        <slot />
+
+        <!-- Minimalist Toast notification -->
+        <div
+            id="global-toast"
+            class="rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-neutral-900/95 px-3.5 py-2 text-xs text-neutral-800 dark:text-neutral-200 font-sans shadow-2xl backdrop-blur-md flex items-center gap-2"
+        >
+            <span class="size-1.5 rounded-full bg-emerald-400"></span>
+            <span id="toast-message">Copied</span>
+        </div>
+
+        <script>
+            // Toast notification helper
+            let toastTimer: any = null;
+            function showToast(msg: string) {
+                const toast = document.getElementById("global-toast");
+                const msgEl = document.getElementById("toast-message");
+                if (!toast || !msgEl) return;
+                msgEl.textContent = msg;
+                toast.classList.add("show");
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 2000);
+            }
+
+            // Global copy helper
+            document.addEventListener("click", async (e) => {
+                const copyBtn = (e.target as Element).closest?.(
+                    "[data-copy]",
+                ) as HTMLElement | null;
+                if (!copyBtn) return;
+                const text = copyBtn.getAttribute("data-copy");
+                if (!text) return;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    showToast(
+                        `Copied ${text.length > 24 ? text.slice(0, 20) + "..." : text}`,
+                    );
+
+                    const icon = copyBtn.querySelector(".copy-icon");
+                    if (icon) {
+                        const def = icon.querySelector(".copy-default");
+                        const succ = icon.querySelector(".copy-success");
+                        if (def && succ) {
+                            def.classList.add("hidden");
+                            succ.classList.remove("hidden");
+                            setTimeout(() => {
+                                def.classList.remove("hidden");
+                                succ.classList.add("hidden");
+                            }, 1800);
+                        }
+                    }
+                } catch {
+                    showToast("Failed to copy");
+                }
+            });
+        </script>
+    </body>
+</html>

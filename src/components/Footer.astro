@@ -1,0 +1,30 @@
+---
+import { Image } from "astro:assets";
+import tiger from "../assets/tiger.png";
+import { ArrowUp, Dot } from "lucide-astro";
+const year = new Date().getFullYear();
+---
+
+<footer class="w-full border-b border-dotted border-neutral-400 dark:border-neutral-700 font-sans text-neutral-500">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x-0 sm:border-x border-dotted border-neutral-400 dark:border-neutral-700 py-3 sm:py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+    <div class="flex items-center gap-2">
+      <Image
+        src={tiger}
+        alt="Tiger emblem"
+        width={24}
+        height={16}
+        class="w-5 h-auto object-contain select-none"
+      />
+      <p class="flex items-center gap-0.5">
+        <span>© {year} Nukala Abhiram</span>
+        <Dot class="size-3.5 -mx-1 text-neutral-400 dark:text-neutral-600 shrink-0" />
+        <span>Hyderabad, India</span>
+      </p>
+    </div>
+
+    <a href="#top" class="hover:text-orange-600 dark:hover:text-orange-400 transition-colors inline-flex items-center gap-1 font-sans py-0.5 self-start sm:self-auto group">
+      <span>top</span>
+      <ArrowUp class="size-3 text-neutral-400 dark:text-neutral-500 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:-translate-y-0.5 transition-all" />
+    </a>
+  </div>
+</footer>
