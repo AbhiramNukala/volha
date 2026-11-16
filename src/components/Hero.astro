@@ -39,9 +39,11 @@ import { ArrowDown, ArrowUpRight, Dot, Copy, Check } from "lucide-astro";
                     <Image
                         src={tiger}
                         alt=""
-                        width={260}
-                        height={180}
-                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 sm:w-40 md:w-48 h-auto aspect-[260/180] object-contain rotate-10 pointer-events-none select-none opacity-85 -z-10 filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_8px_16px_rgba(0,0,0,0.85)]"
+                        widths={[112, 170, 231]}
+                        sizes="(min-width: 768px) 192px, (min-width: 640px) 160px, 112px"
+                        quality={75}
+                        format="webp"
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 sm:w-40 md:w-48 h-auto aspect-[231/161] object-contain rotate-10 pointer-events-none select-none opacity-85 -z-10 filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_8px_16px_rgba(0,0,0,0.85)]"
                         loading="eager"
                         fetchpriority="high"
                         aria-hidden="true"
