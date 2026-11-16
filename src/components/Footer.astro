@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import tiger from "../assets/tiger.png";
+import tiger from "../assets/tiger.webp";
 import { ArrowUp, Dot } from "lucide-astro";
 const year = new Date().getFullYear();
 ---
@@ -13,7 +13,7 @@ const year = new Date().getFullYear();
         alt="Tiger emblem"
         width={24}
         height={16}
-        class="w-5 h-auto object-contain select-none"
+        class="w-5 h-auto aspect-[24/16] object-contain select-none"
       />
       <p class="flex items-center gap-0.5">
         <span>© {year} Nukala Abhiram</span>

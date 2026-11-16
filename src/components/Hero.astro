@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import tiger from "../assets/tiger.png";
+import tiger from "../assets/tiger.webp";
 import { links } from "../data";
 import { ArrowDown, ArrowUpRight, Dot, Copy, Check } from "lucide-astro";
 ---
@@ -41,8 +41,9 @@ import { ArrowDown, ArrowUpRight, Dot, Copy, Check } from "lucide-astro";
                         alt=""
                         width={260}
                         height={180}
-                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 sm:w-40 md:w-48 h-auto object-contain rotate-10 pointer-events-none select-none opacity-85 -z-10 filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_8px_16px_rgba(0,0,0,0.85)]"
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 sm:w-40 md:w-48 h-auto aspect-[260/180] object-contain rotate-10 pointer-events-none select-none opacity-85 -z-10 filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_8px_16px_rgba(0,0,0,0.85)]"
                         loading="eager"
+                        fetchpriority="high"
                         aria-hidden="true"
                     />
                     <span class="relative z-10 italic text-orange-600 dark:text-orange-400 font-serif">
