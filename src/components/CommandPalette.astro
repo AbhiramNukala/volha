@@ -1,0 +1,248 @@
+---
+import { Search, CornerDownLeft, Moon, Sun, Copy, ExternalLink, Mail, X } from "lucide-astro";
+import { personal } from "../data";
+---
+
+<!-- Command Palette Modal Backdrop -->
+<div
+  id="command-palette-backdrop"
+  class="fixed inset-0 z-[100] bg-neutral-950/70 backdrop-blur-xs hidden items-start justify-center pt-[12vh] px-4"
+  aria-modal="true"
+  role="dialog"
+>
+  <!-- Modal Dialog -->
+  <div
+    id="command-palette-modal"
+    class="w-full max-w-xl rounded-xl border border-neutral-300 dark:border-neutral-800 bg-white dark:bg-[#13141a] text-neutral-900 dark:text-neutral-100 shadow-2xl overflow-hidden font-sans"
+  >
+    <!-- Search Input Bar -->
+    <div class="flex items-center gap-3 px-4 py-3.5 border-b border-neutral-200 dark:border-neutral-800">
+      <Search class="size-4 text-neutral-400 shrink-0" />
+      <input
+        id="command-palette-input"
+        type="text"
+        placeholder="Type to search sections or actions..."
+        class="w-full bg-transparent text-sm text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <button
+        type="button"
+        id="command-palette-close"
+        class="size-6 flex items-center justify-center rounded text-neutral-400 hover:text-neutral-900 dark:hover:text-white cursor-pointer"
+        aria-label="Close"
+      >
+        <X class="size-4" />
+      </button>
+    </div>
+
+    <!-- Results List -->
+    <div id="command-results" class="max-h-[360px] overflow-y-auto p-2 space-y-1 text-xs">
+      <div class="px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-neutral-400">
+        Sections
+      </div>
+
+      <a
+        href="#top"
+        class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
+        data-keyword="top hero home summary about"
+      >
+        <span class="font-medium text-sm">Top / Summary</span>
+        <CornerDownLeft class="size-3.5 text-neutral-400 opacity-0 group-hover:opacity-100" />
+      </a>
+
+      <a
+        href="#about"
+        class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
+        data-keyword="skills technologies tools react native c++ typescript web mobile"
+      >
+        <span class="font-medium text-sm">01 / Technical Skills</span>
+        <CornerDownLeft class="size-3.5 text-neutral-400 opacity-0 group-hover:opacity-100" />
+      </a>
+
+      <a
+        href="#experience"
+        class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
+        data-keyword="experience work history mindwave makeroot estimate ai musidy medicalshare"
+      >
+        <span class="font-medium text-sm">02 / Professional Experience</span>
+        <CornerDownLeft class="size-3.5 text-neutral-400 opacity-0 group-hover:opacity-100" />
+      </a>
+
+      <a
+        href="#work"
+        class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
+        data-keyword="projects open source rn-udpb cosmos c++ jsi nitro modules mastodon"
+      >
+        <span class="font-medium text-sm">03 / Selected Projects</span>
+        <CornerDownLeft class="size-3.5 text-neutral-400 opacity-0 group-hover:opacity-100" />
+      </a>
+
+      <a
+        href="#contact"
+        class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
+        data-keyword="contact email get in touch reach"
+      >
+        <span class="font-medium text-sm">04 / Get in Touch</span>
+        <CornerDownLeft class="size-3.5 text-neutral-400 opacity-0 group-hover:opacity-100" />
+      </a>
+
+      <div class="px-2 pt-3 pb-1 text-[10px] font-mono uppercase tracking-wider text-neutral-400 border-t border-neutral-100 dark:border-neutral-800 mt-1">
+        Quick Actions
+      </div>
+
+      <button
+        type="button"
+        id="cmd-copy-email"
+        class="command-item w-full flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer text-left"
+        data-keyword="copy email"
+      >
+        <div class="flex items-center gap-2">
+          <Mail class="size-4 text-neutral-400" />
+          <span class="font-medium">Copy Email ({personal.email})</span>
+        </div>
+        <span class="text-[10px] font-mono text-neutral-400">Copy</span>
+      </button>
+
+      <button
+        type="button"
+        id="cmd-toggle-theme"
+        class="command-item w-full flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer text-left"
+        data-keyword="theme dark light mode toggle"
+      >
+        <div class="flex items-center gap-2">
+          <Moon class="size-4 text-neutral-400 block dark:hidden" />
+          <Sun class="size-4 text-neutral-400 hidden dark:block" />
+          <span class="font-medium">Toggle Color Theme</span>
+        </div>
+        <span class="text-[10px] font-mono text-neutral-400">Toggle</span>
+      </button>
+
+      <a
+        href={personal.github}
+        target="_blank"
+        rel="noopener"
+        class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
+        data-keyword="github profile code"
+      >
+        <div class="flex items-center gap-2">
+          <ExternalLink class="size-4 text-neutral-400" />
+          <span class="font-medium">Open GitHub Profile</span>
+        </div>
+        <span class="text-[10px] font-mono text-neutral-400">↗</span>
+      </a>
+
+      <a
+        href={personal.linkedin}
+        target="_blank"
+        rel="noopener"
+        class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
+        data-keyword="linkedin profile connect"
+      >
+        <div class="flex items-center gap-2">
+          <ExternalLink class="size-4 text-neutral-400" />
+          <span class="font-medium">Open LinkedIn Profile</span>
+        </div>
+        <span class="text-[10px] font-mono text-neutral-400">↗</span>
+      </a>
+    </div>
+
+    <!-- Footer Bar -->
+    <div class="px-4 py-2.5 bg-neutral-50 dark:bg-neutral-900/60 border-t border-neutral-200 dark:border-neutral-800 text-[11px] text-neutral-400 flex items-center justify-between font-mono">
+      <span>Press ESC to dismiss</span>
+      <span>Nukala Abhiram</span>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const backdrop = document.getElementById("command-palette-backdrop");
+    const input = document.getElementById("command-palette-input");
+    const closeBtn = document.getElementById("command-palette-close");
+    let isOpen = false;
+
+    function openPalette() {
+      if (!backdrop) return;
+      isOpen = true;
+      backdrop.classList.remove("hidden");
+      backdrop.classList.add("flex");
+      input?.focus();
+    }
+
+    function closePalette() {
+      if (!backdrop) return;
+      isOpen = false;
+      backdrop.classList.remove("flex");
+      backdrop.classList.add("hidden");
+      if (input) input.value = "";
+      filterItems("");
+    }
+
+    window.openCommandPalette = openPalette;
+    window.closeCommandPalette = closePalette;
+
+    // Delegated click listener so ANY element with data-command-trigger works anytime!
+    document.addEventListener("click", (e) => {
+      const trigger = e.target.closest("[data-command-trigger]");
+      if (trigger) {
+        e.preventDefault();
+        openPalette();
+      }
+    });
+
+    closeBtn?.addEventListener("click", closePalette);
+
+    // Keyboard shortcut Cmd+K or Ctrl+K
+    window.addEventListener("keydown", (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        isOpen ? closePalette() : openPalette();
+      } else if (e.key === "Escape" && isOpen) {
+        e.preventDefault();
+        closePalette();
+      }
+    });
+
+    backdrop?.addEventListener("click", (e) => {
+      if (e.target === backdrop) closePalette();
+    });
+
+    function filterItems(query) {
+      const q = query.toLowerCase().trim();
+      const items = document.querySelectorAll(".command-item");
+      items.forEach((item) => {
+        const keyword = item.getAttribute("data-keyword") || "";
+        const text = item.textContent?.toLowerCase() || "";
+        if (!q || keyword.includes(q) || text.includes(q)) {
+          item.classList.remove("hidden");
+        } else {
+          item.classList.add("hidden");
+        }
+      });
+    }
+
+    input?.addEventListener("input", (e) => {
+      filterItems(e.target.value);
+    });
+
+    document.querySelectorAll(".command-item").forEach((item) => {
+      item.addEventListener("click", () => {
+        closePalette();
+      });
+    });
+
+    document.getElementById("cmd-copy-email")?.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("abhiram.reddy122002@gmail.com");
+        if (window.showToast) window.showToast("Copied email address");
+      } catch (_) {}
+    });
+
+    document.getElementById("cmd-toggle-theme")?.addEventListener("click", () => {
+      if (typeof window.toggleTheme === "function") {
+        window.toggleTheme();
+      }
+    });
+  })();
+</script>

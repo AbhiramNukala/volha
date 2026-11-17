@@ -1,125 +1,186 @@
 ---
 import { Image } from "astro:assets";
 import tiger from "../assets/tiger.webp";
-import { links } from "../data";
-import { ArrowDown, ArrowUpRight, Dot, Copy, Check } from "lucide-astro";
+import { personal } from "../data";
+import { ArrowDown, ArrowUpRight, ArrowRight, Copy, Check } from "lucide-astro";
 ---
 
-<section
-    id="top"
-    class="w-full border-b border-dotted border-neutral-400 dark:border-neutral-700 font-sans"
->
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x-0 sm:border-x border-dotted border-neutral-400 dark:border-neutral-700 pt-4 sm:pt-6 pb-5 sm:pb-7">
-        <div class="space-y-3.5 sm:space-y-4">
-        <!-- Subtitle / Identity Line -->
-        <div class="flex flex-wrap items-center gap-1 text-xs font-sans text-neutral-500 dark:text-neutral-400">
-            <span class="uppercase tracking-widest font-medium text-neutral-900 dark:text-neutral-200">
-                Nukala Abhiram
-            </span>
-            <Dot class="size-4 -mx-1.5 text-neutral-400 dark:text-neutral-600 shrink-0" />
-            <span class="font-serif italic text-sm sm:text-base text-neutral-800 dark:text-neutral-300">
-                Software Engineer
-            </span>
-            <Dot class="size-4 -mx-1.5 text-neutral-400 dark:text-neutral-600 shrink-0" />
-            <span class="text-neutral-500 text-[11px]">Hyderabad, IN</span>
-        </div>
+<section id="top" class="w-full pt-10 sm:pt-16 pb-12 sm:pb-16 font-sans">
+  <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-8 sm:space-y-12">
+    <!-- Top Identity Marker -->
+    <div class="flex items-center justify-between text-xs font-mono text-neutral-500 pb-3 border-b border-neutral-200/80 dark:border-neutral-800/80">
+      <div class="flex items-center gap-2">
+        <span class="text-neutral-900 dark:text-neutral-200 uppercase tracking-widest font-semibold">
+          {personal.name}
+        </span>
+        <span>·</span>
+        <span>{personal.location}</span>
+      </div>
 
-        <!-- Editorial Headline with Tiger Tilted 30deg Behind "Native" -->
-        <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight text-neutral-950 dark:text-white leading-[1.08]">
-            Engineering{" "}
-            <span class="italic text-orange-600 dark:text-orange-400 font-serif">
-                React
-            </span>{" "}
-            &amp;{" "}
-            <span class="inline-block whitespace-nowrap">
-                <span class="italic text-orange-600 dark:text-orange-400 font-serif">
-                    React
-                </span>{" "}
-                <span class="relative inline-block">
-                    <Image
-                        src={tiger}
-                        alt=""
-                        widths={[112, 170, 231]}
-                        sizes="(min-width: 768px) 192px, (min-width: 640px) 160px, 112px"
-                        quality={75}
-                        format="webp"
-                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 sm:w-40 md:w-48 h-auto aspect-[231/161] object-contain rotate-10 pointer-events-none select-none opacity-85 -z-10 filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_8px_16px_rgba(0,0,0,0.85)]"
-                        loading="eager"
-                        fetchpriority="high"
-                        aria-hidden="true"
-                    />
-                    <span class="relative z-10 italic text-orange-600 dark:text-orange-400 font-serif">
-                        Native
-                    </span>
-                </span>
-            </span>{" "}
-            experiences that ship and scale.
+      <div class="text-[11px] hidden sm:block">
+        React.js · React Native · C++ (JSI)
+      </div>
+    </div>
+
+    <!-- Wide Hero Layout using the full horizontal space -->
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+      <div class="lg:col-span-8 space-y-5">
+        <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-normal text-neutral-950 dark:text-white leading-[1.06] tracking-tight">
+          Software Engineer building{" "}
+          <span class="italic text-orange-600 dark:text-orange-400">
+            React.js
+          </span>{" "}
+          web apps &amp;{" "}
+          <span class="italic text-orange-600 dark:text-orange-400">
+            React Native
+          </span>{" "}
+          mobile systems.
         </h1>
 
-        <!-- Narrative in Alata font -->
-        <p class="font-sans text-neutral-700 dark:text-neutral-400 text-xs sm:text-sm md:text-base leading-snug max-w-2xl">
-            Software engineer with 2.7 years of production experience based in
-            Hyderabad, India. I build web dashboards, store releases and mobile
-            payments in TypeScript, plus native modules in C++ with JSI when
-            performance counts.
+        <p class="text-base sm:text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans max-w-3xl pt-1">
+          {personal.summary}
         </p>
 
-        <!-- Quick Actions & Links with Lucide Arrows -->
-        <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs sm:text-sm font-sans pt-0.5">
+        <!-- Navigation & Quick Links -->
+        <div class="pt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:text-sm font-sans border-t border-neutral-200/80 dark:border-neutral-800/80">
+          <a
+            href="#experience"
+            class="inline-flex items-center gap-1.5 font-medium text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 transition-colors group"
+          >
+            <span>Experience</span>
+            <ArrowDown class="size-4 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-y-0.5 transition-all" stroke-width={2.25} />
+          </a>
+
+          <a
+            href="#work"
+            class="inline-flex items-center gap-1.5 font-medium text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 transition-colors group"
+          >
+            <span>Projects</span>
+            <ArrowDown class="size-4 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-y-0.5 transition-all" stroke-width={2.25} />
+          </a>
+
+          <button
+            type="button"
+            data-copy={personal.email}
+            class="inline-flex items-center gap-1.5 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors cursor-pointer group"
+            title="Copy email to clipboard"
+          >
+            <span class="font-mono text-xs">{personal.email}</span>
+            <span class="copy-icon inline-flex items-center text-neutral-400 group-hover:text-orange-500">
+              <Copy class="size-3.5 copy-default" />
+              <Check class="size-3.5 text-emerald-500 copy-success hidden" />
+            </span>
+          </button>
+
+          <span class="text-neutral-300 dark:text-neutral-700 select-none hidden sm:inline">·</span>
+
+          <div class="flex items-center gap-3 font-mono text-xs">
             <a
-                href="#work"
-                class="inline-flex items-center gap-1 font-medium text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 transition-colors group"
+              href={personal.github}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-1 text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors group"
             >
-                <span>View work History</span>
-                <ArrowDown class="size-3 text-neutral-400 dark:text-neutral-500 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-y-0.5 transition-all" />
+              <span>GitHub</span>
+              <ArrowUpRight class="size-3.5 text-neutral-400 group-hover:text-orange-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" stroke-width={2} />
             </a>
 
-            <button
-                type="button"
-                data-copy={links.email}
-                class="inline-flex items-center gap-1.5 text-neutral-700 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors cursor-pointer group"
-                title="Copy email to clipboard"
-                aria-label="Copy email address"
+            <a
+              href={personal.linkedin}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-1 text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors group"
             >
-                <span class="text-xs">{links.email}</span>
-                <span class="copy-icon text-neutral-400 group-hover:text-orange-600 dark:text-neutral-500 dark:group-hover:text-orange-400 transition-colors inline-flex items-center">
-                    <Copy class="size-3 copy-default" />
-                    <Check class="size-3 text-emerald-500 dark:text-emerald-400 copy-success hidden" />
-                </span>
-            </button>
-
-            <Dot class="size-4 -mx-1.5 text-neutral-400 dark:text-neutral-600 hidden sm:inline-block shrink-0" />
+              <span>LinkedIn</span>
+              <ArrowUpRight class="size-3.5 text-neutral-400 group-hover:text-orange-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" stroke-width={2} />
+            </a>
 
             <a
-                href={links.github}
-                target="_blank"
-                rel="noopener"
-                class="inline-flex items-center gap-0.5 text-neutral-700 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors group"
+              href={personal.npm}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-1 text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors group"
             >
-                <span>GitHub</span>
-                <ArrowUpRight class="size-3 text-neutral-400 dark:text-neutral-500 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+              <span>npm</span>
+              <ArrowUpRight class="size-3.5 text-neutral-400 group-hover:text-orange-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" stroke-width={2} />
             </a>
-            <Dot class="size-4 -mx-1.5 text-neutral-400 dark:text-neutral-600 shrink-0" />
-            <a
-                href={links.linkedin}
-                target="_blank"
-                rel="noopener"
-                class="inline-flex items-center gap-0.5 text-neutral-700 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors group"
-            >
-                <span>LinkedIn</span>
-                <ArrowUpRight class="size-3 text-neutral-400 dark:text-neutral-500 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-            </a>
-            <Dot class="size-4 -mx-1.5 text-neutral-400 dark:text-neutral-600 shrink-0" />
-            <a
-                href={links.npm}
-                target="_blank"
-                rel="noopener"
-                class="inline-flex items-center gap-0.5 text-neutral-700 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors group"
-            >
-                <span>npm</span>
-                <ArrowUpRight class="size-3 text-neutral-400 dark:text-neutral-500 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-            </a>
+          </div>
         </div>
+      </div>
+
+      <!-- Right Column: Mascot & Quick Jump Anchor List -->
+      <div class="lg:col-span-4 flex flex-col justify-between space-y-6 pt-2">
+        <div class="flex items-center gap-4">
+          <Image
+            src={tiger}
+            alt="Tiger mascot emblem"
+            width={96}
+            height={68}
+            quality={85}
+            loading="lazy"
+            decoding="async"
+            class="w-20 sm:w-24 h-auto aspect-[96/68] object-contain select-none filter drop-shadow-sm"
+          />
+          <div>
+            <span class="text-xs font-mono uppercase tracking-widest text-neutral-400 block font-semibold">
+              Location
+            </span>
+            <span class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+              Hyderabad, India
+            </span>
+            <span class="text-xs font-mono text-neutral-500 block">
+              UTC+05:30 (IST)
+            </span>
+          </div>
+        </div>
+
+        <!-- High-Visibility, Bold Index Directory -->
+        <div class="pt-4 border-t border-neutral-200/80 dark:border-neutral-800/80 space-y-1 font-mono text-xs sm:text-sm">
+          <span class="text-[10px] uppercase tracking-widest text-neutral-400 block mb-2 font-semibold">
+            Index
+          </span>
+          <a
+            href="#about"
+            class="group flex items-center justify-between py-2 border-b border-neutral-100 dark:border-neutral-800/60 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors"
+          >
+            <span class="font-medium">01 / Technical Skills</span>
+            <ArrowRight
+              class="size-4.5 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-1 transition-all shrink-0"
+              stroke-width={2.25}
+            />
+          </a>
+          <a
+            href="#experience"
+            class="group flex items-center justify-between py-2 border-b border-neutral-100 dark:border-neutral-800/60 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors"
+          >
+            <span class="font-medium">02 / Experience</span>
+            <ArrowRight
+              class="size-4.5 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-1 transition-all shrink-0"
+              stroke-width={2.25}
+            />
+          </a>
+          <a
+            href="#work"
+            class="group flex items-center justify-between py-2 border-b border-neutral-100 dark:border-neutral-800/60 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors"
+          >
+            <span class="font-medium">03 / Selected Projects</span>
+            <ArrowRight
+              class="size-4.5 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-1 transition-all shrink-0"
+              stroke-width={2.25}
+            />
+          </a>
+          <a
+            href="#contact"
+            class="group flex items-center justify-between py-2 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors"
+          >
+            <span class="font-medium">04 / Contact</span>
+            <ArrowRight
+              class="size-4.5 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-1 transition-all shrink-0"
+              stroke-width={2.25}
+            />
+          </a>
+        </div>
+      </div>
     </div>
-    </div>
+  </div>
 </section>

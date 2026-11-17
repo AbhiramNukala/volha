@@ -1,30 +1,39 @@
 ---
 import { Image } from "astro:assets";
 import tiger from "../assets/tiger.webp";
-import { ArrowUp, Dot } from "lucide-astro";
-const year = new Date().getFullYear();
+import { Command } from "lucide-astro";
+import { personal } from "../data";
 ---
 
-<footer class="w-full border-b border-dotted border-neutral-400 dark:border-neutral-700 font-sans text-neutral-500">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x-0 sm:border-x border-dotted border-neutral-400 dark:border-neutral-700 py-3 sm:py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-    <div class="flex items-center gap-2">
+<footer class="w-full py-8 border-t border-neutral-200/80 dark:border-neutral-800/80 font-sans text-xs text-neutral-500 bg-transparent">
+  <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div class="flex items-center gap-2.5">
       <Image
         src={tiger}
-        alt="Tiger emblem"
-        width={24}
-        height={16}
-        class="w-5 h-auto aspect-[24/16] object-contain select-none"
+        alt="Tiger mascot"
+        width={22}
+        height={15}
+        loading="lazy"
+        decoding="async"
+        class="w-5 h-auto aspect-[22/15] object-contain select-none"
       />
-      <p class="flex items-center gap-0.5">
-        <span>© {year} Nukala Abhiram</span>
-        <Dot class="size-3.5 -mx-1 text-neutral-400 dark:text-neutral-600 shrink-0" />
+      <p class="flex items-center gap-1">
+        <span>{personal.name}</span>
+        <span>·</span>
         <span>Hyderabad, India</span>
       </p>
     </div>
 
-    <a href="#top" class="hover:text-orange-600 dark:hover:text-orange-400 transition-colors inline-flex items-center gap-1 font-sans py-0.5 self-start sm:self-auto group">
-      <span>top</span>
-      <ArrowUp class="size-3 text-neutral-400 dark:text-neutral-500 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:-translate-y-0.5 transition-all" />
-    </a>
+    <div class="flex items-center gap-4">
+      <button
+        type="button"
+        data-command-trigger
+        onclick="window.openCommandPalette && window.openCommandPalette()"
+        class="inline-flex items-center gap-1 text-[11px] font-mono text-neutral-500 hover:text-orange-600 dark:hover:text-orange-400 transition-colors cursor-pointer"
+      >
+        <Command class="size-3" />
+        <span>Command Menu (⌘K)</span>
+      </button>
+    </div>
   </div>
 </footer>

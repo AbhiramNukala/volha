@@ -1,31 +1,36 @@
 ---
 interface Props {
   id: string;
+  number?: string;
   kicker?: string;
   title: string;
   subtitle?: string;
+  class?: string;
 }
 
-const { id, kicker, title, subtitle } = Astro.props;
+const { id, number, kicker, title, subtitle, class: className = "" } = Astro.props;
 ---
 
-<section id={id} class="w-full border-b border-dotted border-neutral-400 dark:border-neutral-700 font-sans">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x-0 sm:border-x border-dotted border-neutral-400 dark:border-neutral-700 py-5 sm:py-7">
-    <div class="mb-3 sm:mb-4">
-      {kicker && (
-        <p class="font-sans text-[10px] sm:text-[11px] uppercase tracking-widest text-neutral-500 mb-0.5 font-medium">
-          {kicker}
-        </p>
-      )}
-      <h2 class="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-neutral-950 dark:text-white leading-tight">
+<section id={id} class={`w-full py-12 sm:py-16 border-t border-neutral-200 dark:border-neutral-800 font-sans ${className}`}>
+  <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+    <div class="mb-8 sm:mb-12">
+      <div class="flex items-center gap-2 mb-2 font-mono text-xs text-neutral-500 uppercase tracking-widest">
+        {number && <span class="text-orange-600 dark:text-orange-400 font-semibold">{number}</span>}
+        {number && kicker && <span>·</span>}
+        {kicker && <span>{kicker}</span>}
+      </div>
+
+      <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-neutral-950 dark:text-white tracking-tight">
         {title}
       </h2>
+
       {subtitle && (
-        <p class="mt-1 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 max-w-xl leading-snug font-sans">
+        <p class="mt-2 text-sm sm:text-base text-neutral-600 dark:text-neutral-400 max-w-3xl leading-relaxed">
           {subtitle}
         </p>
       )}
     </div>
+
     <slot />
   </div>
 </section>

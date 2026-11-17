@@ -1,78 +1,89 @@
 ---
 import Section from "./Section.astro";
 import { projects } from "../data";
-import { ArrowUpRight, Dot, Copy, Check } from "lucide-astro";
+import { ArrowUpRight, Copy, Check, Dot } from "lucide-astro";
 ---
 
-<Section id="work" kicker="Selected Work" title="Open Source & Projects">
-  <div class="space-y-4 font-sans">
-    {projects.map((p) => (
-      <article class="space-y-2 pb-4 border-b border-dotted border-neutral-400 dark:border-neutral-700 last:border-b-0 last:pb-0">
-        <!-- Title & Metadata -->
-        <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-          <div class="flex items-center gap-2">
-            <h3 class="font-serif text-lg sm:text-xl font-normal text-neutral-950 dark:text-white tracking-tight">
-              {p.title}
-            </h3>
-            {p.featured && (
-              <span class="text-[9px] font-sans px-1.5 py-0.2 rounded bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-300 uppercase tracking-wider font-medium">
-                featured
-              </span>
-            )}
+<Section
+  id="work"
+  number="03"
+  kicker="Open Source & Projects"
+  title="Selected Projects"
+  subtitle="Open-source React Native modules and applications built with C++ JSI and modern web standards."
+>
+  <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 font-sans">
+    {projects.map((project) => (
+      <article class="space-y-4 pt-4 border-t border-neutral-200 dark:border-neutral-800 flex flex-col justify-between">
+        <div class="space-y-3">
+          <!-- Header -->
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 pb-1">
+            <div>
+              <div class="flex items-baseline gap-2">
+                <h3 class="font-serif text-2xl sm:text-3xl font-normal text-neutral-950 dark:text-white tracking-tight">
+                  {project.title}
+                </h3>
+                <span class="text-xs font-mono text-neutral-500">
+                  / {project.subtitle}
+                </span>
+              </div>
+              <p class="text-xs font-mono text-neutral-500 mt-0.5">
+                {project.tag}
+              </p>
+            </div>
+
+            <div class="text-xs font-mono text-neutral-500">
+              <span>{project.date}</span>
+            </div>
           </div>
-          <div class="text-[11px] sm:text-xs text-neutral-500 flex items-center">
-            <span>{p.tag}</span>
-            <Dot class="size-3.5 -mx-1 text-neutral-400 dark:text-neutral-600 shrink-0" />
-            <span>{p.date}</span>
-          </div>
+
+          <!-- Description -->
+          <p class="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+            {project.blurb}
+          </p>
+
+          <!-- Command (if installable) -->
+          {project.install && (
+            <div class="pt-1">
+              <button
+                type="button"
+                data-copy={project.install}
+                class="inline-flex items-center gap-2 px-2.5 py-1 rounded border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 text-xs font-mono text-neutral-800 dark:text-neutral-200 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors cursor-pointer group"
+                title="Click to copy install command"
+              >
+                <span class="text-orange-600 dark:text-orange-500 select-none">$</span>
+                <span>{project.install}</span>
+                <span class="copy-icon inline-flex items-center text-neutral-400 group-hover:text-orange-500">
+                  <Copy class="size-3 copy-default" />
+                  <Check class="size-3 text-emerald-500 copy-success hidden" />
+                </span>
+              </button>
+            </div>
+          )}
         </div>
 
-        <!-- Description -->
-        <p class="font-sans text-neutral-700 dark:text-neutral-400 text-xs sm:text-sm leading-snug max-w-2xl">
-          {p.blurb}
-        </p>
-
-        <!-- Command (if installable) -->
-        {p.install && (
-          <div class="pt-0.5">
-            <button
-              type="button"
-              data-copy={p.install}
-              class="inline-flex items-center gap-1.5 rounded border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900/60 px-2 py-0.5 text-xs text-neutral-800 dark:text-neutral-200 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors cursor-pointer group"
-              title="Click to copy install command"
-              aria-label="Copy install command"
-            >
-              <span class="text-neutral-400 dark:text-neutral-500 select-none">$</span>
-              <span>{p.install}</span>
-              <span class="copy-icon text-neutral-400 group-hover:text-orange-600 dark:text-neutral-500 dark:group-hover:text-orange-400 transition-colors inline-flex items-center">
-                <Copy class="size-3 copy-default" />
-                <Check class="size-3 text-emerald-500 dark:text-emerald-400 copy-success hidden" />
-              </span>
-            </button>
-          </div>
-        )}
-
         <!-- Stack & Links -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1 text-xs font-sans">
-          <div class="text-neutral-500 text-[11px] sm:text-xs flex flex-wrap items-center">
-            {p.stack.map((item, idx) => (
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-neutral-100 dark:border-neutral-800/80 text-xs">
+          <div class="flex items-center gap-1 font-mono text-neutral-500 flex-wrap">
+            {project.stack.map((item, idx) => (
               <>
                 <span>{item}</span>
-                {idx < p.stack.length - 1 && <Dot class="size-3 -mx-1 text-neutral-400 dark:text-neutral-600 shrink-0" />}
+                {idx < project.stack.length - 1 && (
+                  <Dot class="size-3 -mx-1 text-neutral-400 dark:text-neutral-600 shrink-0" />
+                )}
               </>
             ))}
           </div>
 
-          <div class="flex items-center gap-3 pt-0.5 sm:pt-0">
-            {p.links.map((l) => (
+          <div class="flex items-center gap-3 font-mono">
+            {project.links.map((link) => (
               <a
-                href={l.href}
+                href={link.href}
                 target="_blank"
                 rel="noopener"
-                class="inline-flex items-center gap-0.5 text-xs font-medium text-neutral-800 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors underline underline-offset-4 decoration-neutral-300 hover:decoration-orange-500 dark:decoration-neutral-700 dark:hover:decoration-orange-400 py-0.5 group"
+                class="inline-flex items-center gap-0.5 text-neutral-800 hover:text-orange-600 dark:text-neutral-200 dark:hover:text-orange-400 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 transition-colors"
               >
-                <span>{l.label}</span>
-                <ArrowUpRight class="size-3 text-neutral-400 dark:text-neutral-500 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                <span>{link.label}</span>
+                <ArrowUpRight class="size-3 text-neutral-400" />
               </a>
             ))}
           </div>

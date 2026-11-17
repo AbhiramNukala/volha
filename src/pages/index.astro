@@ -5,20 +5,22 @@ import Hero from "../components/Hero.astro";
 import About from "../components/About.astro";
 import Experience from "../components/Experience.astro";
 import Work from "../components/Work.astro";
-import Pricing from "../components/Pricing.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
+import CommandPalette from "../components/CommandPalette.astro";
+import ScrollToTop from "../components/ScrollToTop.astro";
 ---
 
 <Layout>
-    <Nav />
-    <main class="w-full flex-1">
-        <Hero />
-        <About />
-        <Experience />
-        <Work />
-        <Pricing />
-        <Contact />
-    </main>
-    <Footer />
+  <CommandPalette />
+  <Nav />
+  <main class="w-full flex-1">
+    <Hero />
+    <About />
+    <Experience />
+    <Work />
+    <Contact />
+  </main>
+  <Footer />
+  <ScrollToTop />
 </Layout>

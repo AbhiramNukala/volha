@@ -1,0 +1,75 @@
+---
+import { ArrowUp } from "lucide-astro";
+---
+
+<button
+  id="scroll-to-top"
+  type="button"
+  aria-label="Scroll to top"
+  class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 size-11 sm:size-12 rounded-full bg-white/90 dark:bg-neutral-900/90 text-neutral-800 dark:text-neutral-200 shadow-xl backdrop-blur-md opacity-0 pointer-events-none translate-y-3 transition-all duration-300 flex items-center justify-center cursor-pointer group hover:scale-105 active:scale-95"
+>
+  <!-- Circular SVG Progress Ring at the Border -->
+  <svg class="absolute inset-0 size-full -rotate-90 pointer-events-none" viewBox="0 0 36 36">
+    <circle
+      cx="18"
+      cy="18"
+      r="16"
+      fill="none"
+      class="stroke-neutral-200 dark:stroke-neutral-800"
+      stroke-width="2.5"
+    />
+    <circle
+      id="scroll-progress-circle"
+      cx="18"
+      cy="18"
+      r="16"
+      fill="none"
+      class="stroke-orange-500"
+      stroke-width="2.5"
+      stroke-dasharray="100.53"
+      stroke-dashoffset="100.53"
+      stroke-linecap="round"
+      style="transition: stroke-dashoffset 60ms linear;"
+    />
+  </svg>
+
+  <!-- Arrow Up Icon in Center -->
+  <ArrowUp class="size-4.5 text-neutral-700 dark:text-neutral-300 group-hover:-translate-y-0.5 group-hover:text-orange-500 transition-all" />
+</button>
+
+<script is:inline>
+  (function () {
+    const btn = document.getElementById("scroll-to-top");
+    const circle = document.getElementById("scroll-progress-circle");
+    const circumference = 2 * Math.PI * 16; // 100.53
+
+    function onScroll() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+
+      if (circle) {
+        const offset = circumference - Math.min(Math.max(progress, 0), 1) * circumference;
+        circle.style.strokeDashoffset = `${offset}`;
+      }
+
+      if (btn) {
+        if (scrollTop > 180) {
+          btn.classList.remove("opacity-0", "pointer-events-none", "translate-y-3");
+          btn.classList.add("opacity-100", "pointer-events-auto", "translate-y-0");
+        } else {
+          btn.classList.add("opacity-0", "pointer-events-none", "translate-y-3");
+          btn.classList.remove("opacity-100", "pointer-events-auto", "translate-y-0");
+        }
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    onScroll();
+
+    btn?.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  })();
+</script>

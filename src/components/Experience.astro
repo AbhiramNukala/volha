@@ -1,54 +1,73 @@
 ---
 import Section from "./Section.astro";
 import { experience } from "../data";
-import { Dot, ArrowRight } from "lucide-astro";
+import { ArrowRight, Dot } from "lucide-astro";
 ---
 
-<Section id="experience" kicker="Experience" title="Work History">
-    <div class="space-y-6 font-sans">
-        {experience.map((job) => (
-            <div class="space-y-3">
-                <!-- Job Header -->
-                <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 pb-1.5 border-b border-dotted border-neutral-400 dark:border-neutral-700">
-                    <div>
-                        <h3 class="font-serif text-lg sm:text-xl font-normal text-neutral-950 dark:text-white tracking-tight">
-                            {job.company}
-                        </h3>
-                        <p class="font-sans text-xs text-neutral-800 dark:text-neutral-300 mt-0.5">
-                            {job.role}
-                        </p>
-                    </div>
-                    <div class="text-[11px] sm:text-xs text-neutral-500 sm:text-right mt-0.5 sm:mt-0 flex items-center sm:justify-end gap-0.5">
-                        <span>{job.period}</span>
-                        <Dot class="size-3.5 -mx-1 text-neutral-400 dark:text-neutral-600 shrink-0" />
-                        <span>{job.place}</span>
-                    </div>
+<Section
+  id="experience"
+  number="02"
+  kicker="Work History"
+  title="Professional Experience"
+  subtitle="Production engineering roles focused on React.js web apps and React Native iOS and Android systems."
+>
+  <div class="space-y-16 sm:space-y-20 font-sans">
+    {experience.map((job) => (
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-16 pt-8 border-t border-neutral-200 dark:border-neutral-800 first:border-t-0 first:pt-0">
+        <!-- Left Column: Company & Role Information -->
+        <div class="lg:col-span-4 space-y-2 lg:sticky lg:top-24 self-start">
+          <h3 class="font-serif text-3xl sm:text-4xl font-normal text-neutral-950 dark:text-white tracking-tight">
+            {job.company}
+          </h3>
+          <p class="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+            {job.role}
+          </p>
+          <div class="flex flex-wrap items-center gap-1 font-mono text-xs text-neutral-500 pt-0.5">
+            <span>{job.period}</span>
+            <Dot class="size-3 -mx-1 text-neutral-400 dark:text-neutral-600" />
+            <span>{job.place}</span>
+          </div>
+        </div>
+
+        <!-- Right Column: Projects & Bulleted Achievements -->
+        <div class="lg:col-span-8 space-y-12">
+          {job.projects.map((project) => (
+            <div class="space-y-3.5 pb-8 sm:pb-10 border-b border-neutral-200/80 dark:border-neutral-800/80 last:border-b-0 last:pb-0">
+              <!-- Project Header: Stacked cleanly on mobile so words NEVER break awkwardly -->
+              <div class="space-y-1">
+                <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+                  <h4 class="font-semibold text-base sm:text-lg text-neutral-950 dark:text-white shrink-0 tracking-tight">
+                    {project.name}
+                  </h4>
+                  <span class="text-xs font-mono text-neutral-500">
+                    / {project.meta}
+                  </span>
                 </div>
 
-                <!-- Job Projects (Pure editorial flow, no cards/boxes) -->
-                <div class="space-y-3 sm:pl-1">
-                    {job.projects.map((p) => (
-                        <div class="space-y-1">
-                            <div class="flex flex-wrap items-baseline gap-1.5">
-                                <h4 class="font-sans text-xs sm:text-sm font-semibold text-neutral-900 dark:text-neutral-200">
-                                    {p.name}
-                                </h4>
-                                <span class="text-[11px] sm:text-xs text-neutral-500">
-                                    / {p.meta}
-                                </span>
-                            </div>
-                            <ul class="space-y-1 text-xs sm:text-sm text-neutral-700 dark:text-neutral-400 leading-snug font-sans">
-                                {p.points.map((pt) => (
-                                    <li class="flex items-start gap-2">
-                                        <ArrowRight class="size-3.5 -mx-1 text-neutral-400 dark:text-neutral-600 shrink-0 mt-1" />
-                                        <span>{pt}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
+                <!-- Tech Stack tags with clean spacing -->
+                <div class="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 font-mono text-[11px] text-neutral-500 pt-0.5">
+                  {project.tech.map((t, idx) => (
+                    <>
+                      <span>{t}</span>
+                      {idx < project.tech.length - 1 && <span class="text-neutral-300 dark:text-neutral-700 select-none">·</span>}
+                    </>
+                  ))}
                 </div>
+              </div>
+
+              <!-- Bullet Points with breathing room -->
+              <ul class="space-y-3 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed pt-1">
+                {project.points.map((pt) => (
+                  <li class="flex items-start gap-3">
+                    <ArrowRight class="size-3.5 text-neutral-400 dark:text-neutral-500 shrink-0 mt-1" />
+                    <span>{pt}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-        ))}
-    </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
 </Section>

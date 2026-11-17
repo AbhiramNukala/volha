@@ -1,51 +1,82 @@
 ---
 import { Image } from "astro:assets";
 import tiger from "../assets/tiger.webp";
-import { ArrowRight, Sun, Moon } from "lucide-astro";
+import { personal } from "../data";
+import { ArrowRight, Sun, Moon, Command, Copy, Check } from "lucide-astro";
 
-const links = [
-  { label: "About", href: "#about" },
+const navLinks = [
+  { label: "Skills", href: "#about" },
   { label: "Experience", href: "#experience" },
-  { label: "Work", href: "#work" },
-  { label: "Services", href: "#services" },
+  { label: "Projects", href: "#work" },
   { label: "Contact", href: "#contact" },
 ];
 ---
 
-<header class="w-full border-b border-dotted border-neutral-400 dark:border-neutral-700 font-sans">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x-0 sm:border-x border-dotted border-neutral-400 dark:border-neutral-700 pt-2.5 sm:pt-3.5 pb-2.5 sm:pb-3">
-    <div class="flex items-center justify-between gap-3">
-    <!-- Brand -->
-    <div class="flex items-center gap-2.5 min-w-0">
-      <a href="#top" class="flex items-center gap-2 font-medium text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 transition-colors tracking-tight text-sm shrink-0">
-        <Image
-          src={tiger}
-          alt="Tiger mascot emblem"
-          width={32}
-          height={22}
-          loading="eager"
-          decoding="async"
-          class="w-6 sm:w-7 h-auto aspect-[32/22] object-contain filter drop-shadow-sm select-none"
-        />
-        <span class="font-sans font-medium">Abhiram Nukala</span>
-      </a>
-    </div>
+<header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/90 dark:bg-[#0c0d11]/90 border-b border-neutral-200/80 dark:border-neutral-800/80 transition-colors">
+  <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-3.5 flex items-center justify-between gap-4">
+    <!-- Brand / Tiger Mascot -->
+    <a href="#top" class="flex items-center gap-2.5 group shrink-0">
+      <Image
+        src={tiger}
+        alt="Tiger mascot"
+        width={30}
+        height={21}
+        loading="eager"
+        decoding="async"
+        class="w-6.5 h-auto aspect-[30/21] object-contain select-none group-hover:scale-105 transition-transform"
+      />
+      <div>
+        <span class="font-serif text-lg text-neutral-950 dark:text-white font-normal group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors tracking-tight">
+          {personal.name}
+        </span>
+      </div>
+    </a>
 
-    <!-- Desktop Navigation Links & Theme Toggle -->
-    <div class="hidden sm:flex items-center gap-3.5 text-xs font-sans">
-      <nav class="flex items-center gap-3.5 text-neutral-600 dark:text-neutral-400">
-        {links.map((link) => (
-          <a href={link.href} class="hover:text-orange-600 dark:hover:text-orange-400 transition-colors py-0.5">
-            {link.label}
-          </a>
-        ))}
-      </nav>
+    <!-- Desktop Nav Links -->
+    <nav class="hidden md:flex items-center gap-2 text-xs font-sans text-neutral-600 dark:text-neutral-400">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="nav-anchor px-3 py-1.5 rounded-md hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Desktop Controls -->
+    <div class="hidden sm:flex items-center gap-2">
+      <!-- Menu Command Palette Trigger Button -->
+      <button
+        type="button"
+        data-command-trigger
+        onclick="window.openCommandPalette && window.openCommandPalette()"
+        class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white hover:border-neutral-400 dark:hover:border-neutral-600 text-xs font-mono cursor-pointer transition-colors"
+        title="Open Command Palette (Cmd + K)"
+      >
+        <Command class="size-3 text-neutral-400" />
+        <span>Menu</span>
+        <kbd class="text-[9px] px-1 py-0.2 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-500">⌘K</kbd>
+      </button>
+
+      <button
+        type="button"
+        data-copy={personal.email}
+        class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white text-xs font-sans cursor-pointer transition-colors group"
+        title="Copy Email Address"
+      >
+        <span class="copy-icon inline-flex items-center text-neutral-400 group-hover:text-orange-500">
+          <Copy class="size-3 copy-default" />
+          <Check class="size-3 text-emerald-500 copy-success hidden" />
+        </span>
+        <span class="text-xs">Email</span>
+      </button>
+
       <button
         id="theme-toggle-desktop"
         type="button"
-        aria-label="Toggle color theme"
-        class="flex size-7 items-center justify-center rounded text-neutral-500 hover:text-neutral-950 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:text-white dark:hover:bg-neutral-800/60 transition-colors cursor-pointer"
-        title="Toggle light/dark theme"
+        aria-label="Toggle theme"
+        class="size-8 flex items-center justify-center rounded-md text-neutral-500 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
       >
         <Sun class="size-3.5 hidden dark:block" />
         <Moon class="size-3.5 block dark:hidden" />
@@ -55,11 +86,20 @@ const links = [
     <!-- Mobile Header Controls -->
     <div class="flex sm:hidden items-center gap-2">
       <button
+        type="button"
+        data-command-trigger
+        onclick="window.openCommandPalette && window.openCommandPalette()"
+        aria-label="Open menu"
+        class="size-8 flex items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer"
+      >
+        <Command class="size-3.5" />
+      </button>
+
+      <button
         id="theme-toggle-mobile"
         type="button"
-        aria-label="Toggle color theme"
-        class="flex size-8 items-center justify-center rounded border border-neutral-200 dark:border-neutral-800 bg-neutral-100/70 dark:bg-neutral-900/60 text-neutral-600 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white transition-colors cursor-pointer"
-        title="Toggle light/dark theme"
+        aria-label="Toggle theme"
+        class="size-8 flex items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 cursor-pointer"
       >
         <Sun class="size-3.5 hidden dark:block" />
         <Moon class="size-3.5 block dark:hidden" />
@@ -68,8 +108,8 @@ const links = [
       <button
         id="mobile-nav-toggle"
         type="button"
-        aria-label="Toggle navigation menu"
-        class="flex size-8 items-center justify-center rounded border border-neutral-200 dark:border-neutral-800 bg-neutral-100/70 dark:bg-neutral-900/60 text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
+        aria-label="Toggle navigation"
+        class="size-8 flex items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer"
       >
         <svg id="menu-icon-open" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -84,17 +124,26 @@ const links = [
   <!-- Mobile Dropdown Menu -->
   <div
     id="mobile-nav-menu"
-    class="sm:hidden hidden flex-col gap-0.5 pt-2 mt-2 border-t border-dotted border-neutral-400 dark:border-neutral-700 font-sans"
+    class="sm:hidden hidden flex-col px-6 pt-2 pb-4 border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#0c0d11] text-xs font-sans space-y-1"
   >
-    {links.map((link) => (
+    {navLinks.map((link) => (
       <a
         href={link.href}
-        class="mobile-nav-link flex items-center justify-between py-1.5 px-2.5 rounded text-xs text-neutral-700 dark:text-neutral-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-neutral-100 dark:hover:bg-neutral-900/50 transition-colors group"
+        class="mobile-nav-link flex items-center justify-between py-2 px-2.5 rounded hover:bg-neutral-100 dark:hover:bg-neutral-900 text-neutral-700 dark:text-neutral-300 transition-colors"
       >
         <span>{link.label}</span>
-        <ArrowRight class="size-3 text-neutral-400 dark:text-neutral-600 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 transition-all" />
+        <ArrowRight class="size-3 text-neutral-400" />
       </a>
     ))}
-  </div>
+
+    <div class="pt-2 border-t border-neutral-200 dark:border-neutral-800 flex items-center gap-2">
+      <button
+        type="button"
+        data-copy={personal.email}
+        class="flex-1 py-2 text-center rounded border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 text-xs"
+      >
+        Copy Email
+      </button>
+    </div>
   </div>
 </header>

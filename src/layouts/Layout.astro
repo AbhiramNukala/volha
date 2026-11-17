@@ -1,337 +1,295 @@
 ---
 import "../styles/global.css";
-import { links } from "../data";
-import { getImage } from "astro:assets";
-import tiger from "../assets/tiger.webp";
-import fontAlata from "@fontsource/alata/files/alata-latin-400-normal.woff2?url";
+import { personal, links } from "../data";
+import fontInter from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
+import fontJetBrainsMono from "@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2?url";
 import fontInstrumentSerif from "@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url";
 import fontInstrumentSerifItalic from "@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url";
 
-const lcpTiger = await getImage({
-    src: tiger,
-    widths: [112, 170, 231],
-    sizes: "(min-width: 768px) 192px, (min-width: 640px) 160px, 112px",
-    format: "webp",
-    quality: 75,
-});
-
-const title = "Nukala Abhiram — React & React Native Engineer";
-const description =
-    "Software engineer with 2.7 years building production React.js web apps and React Native iOS/Android apps in TypeScript. Open-source C++/JSI module author.";
+const title = `${personal.name} — ${personal.title}`;
+const description = personal.summary;
 const url = Astro.site?.href ?? "https://abhiramnukala.netlify.app";
 const ogImage = new URL(
-    "/og-image.png",
-    Astro.site ?? "https://abhiramnukala.netlify.app",
+  "/og-image.png",
+  Astro.site ?? "https://abhiramnukala.netlify.app",
 ).href;
 
 const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-        {
-            "@type": "Person",
-            "@id": `${url}#person`,
-            name: "Nukala Abhiram",
-            jobTitle: "Software Engineer",
-            url,
-            image: ogImage,
-            email: `mailto:${links.email}`,
-            address: {
-                "@type": "PostalAddress",
-                addressLocality: "Hyderabad",
-                addressRegion: "Telangana",
-                addressCountry: "IN",
-            },
-            worksFor: {
-                "@type": "Organization",
-                name: "Mindwave AI Solutions",
-            },
-            sameAs: [links.github, links.linkedin, links.npm],
-            knowsAbout: [
-                "React Native",
-                "React.js",
-                "TypeScript",
-                "JavaScript",
-                "C++",
-                "JSI",
-                "Nitro Modules",
-                "Expo",
-                "Hermes Engine",
-                "Redux Toolkit",
-                "RTK Query",
-                "Mobile App Architecture",
-            ],
-        },
-        {
-            "@type": "WebSite",
-            "@id": `${url}#website`,
-            url,
-            name: title,
-            description,
-            publisher: {
-                "@id": `${url}#person`,
-            },
-            inLanguage: "en-US",
-        },
-    ],
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${url}#person`,
+      name: personal.name,
+      jobTitle: personal.title,
+      url,
+      image: ogImage,
+      email: `mailto:${personal.email}`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Hyderabad",
+        addressRegion: "Telangana",
+        addressCountry: "IN",
+      },
+      worksFor: {
+        "@type": "Organization",
+        name: "Mindwave AI Solutions",
+      },
+      sameAs: [links.github, links.linkedin, links.npm],
+      knowsAbout: [
+        "React Native",
+        "React.js",
+        "TypeScript",
+        "JavaScript",
+        "C++",
+        "JSI",
+        "Nitro Modules",
+        "Expo",
+        "Hermes Engine",
+        "Redux Toolkit",
+        "RTK Query",
+        "Role-Based Access Control",
+        "Cashfree",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${url}#website`,
+      url,
+      name: title,
+      description,
+      publisher: {
+        "@id": `${url}#person`,
+      },
+      inLanguage: "en-US",
+    },
+  ],
 };
 ---
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
-        />
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta name="author" content="Nukala Abhiram" />
-        <meta
-            name="keywords"
-            content="Nukala Abhiram, React Native Engineer, React Developer, TypeScript, C++, JSI, Nitro Modules, Expo, Mobile App Developer, Hyderabad, India"
-        />
-        <meta
-            name="robots"
-            content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-        />
-        <link rel="canonical" href={url} />
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={personal.name} />
+    <meta
+      name="keywords"
+      content="Nukala Abhiram, React.js, React Native, TypeScript, C++, JSI, Nitro Modules, Expo, Hyderabad, India"
+    />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <link rel="canonical" href={url} />
 
-        <!-- Preload LCP Hero Image for immediate discovery -->
-        <link
-            rel="preload"
-            as="image"
-            href={lcpTiger.src}
-            imagesrcset={lcpTiger.srcSet.attribute}
-            imagesizes="(min-width: 768px) 192px, (min-width: 640px) 160px, 112px"
-            type="image/webp"
-            fetchpriority="high"
-        />
+    <!-- Preload Critical Fonts -->
+    <link
+      rel="preload"
+      href={fontInter}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href={fontJetBrainsMono}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href={fontInstrumentSerif}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href={fontInstrumentSerifItalic}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
 
-        <!-- Preload Critical Fonts to prevent layout shift (FOUT) -->
-        <link
-            rel="preload"
-            href={fontAlata}
-            as="font"
-            type="font/woff2"
-            crossorigin="anonymous"
-        />
-        <link
-            rel="preload"
-            href={fontInstrumentSerif}
-            as="font"
-            type="font/woff2"
-            crossorigin="anonymous"
-        />
-        <link
-            rel="preload"
-            href={fontInstrumentSerifItalic}
-            as="font"
-            type="font/woff2"
-            crossorigin="anonymous"
-        />
+    <!-- Open Graph / Meta -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content={personal.name} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-        <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={url} />
-        <meta property="og:site_name" content="Nukala Abhiram" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={ogImage} />
-        <meta property="og:image:secure_url" content={ogImage} />
-        <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta
-            property="og:image:alt"
-            content="Nukala Abhiram — React & React Native Software Engineer"
-        />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={url} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
-        <!-- Twitter / X Card -->
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content={url} />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={ogImage} />
-        <meta
-            name="twitter:image:alt"
-            content="Nukala Abhiram — React & React Native Software Engineer"
-        />
+    <meta name="theme-color" content="#fafaf9" id="meta-theme-color" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-        <meta name="theme-color" content="#ffffff" id="meta-theme-color" />
-        <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/apple-touch-icon.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/favicon-32x32.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/site.webmanifest" />
-        <script
-            type="application/ld+json"
-            is:inline
-            set:html={JSON.stringify(jsonLd)}
-        />
-        <script is:inline>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(jsonLd)}
+    />
+
+    <!-- Theme Initializer -->
+    <script is:inline>
+      (function () {
+        try {
+          const stored = localStorage.getItem("theme");
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const meta = document.getElementById("meta-theme-color");
+          if (stored === "dark" || (!stored && prefersDark)) {
+            document.documentElement.classList.add("dark");
+            if (meta) meta.setAttribute("content", "#0c0d11");
+          } else {
+            document.documentElement.classList.remove("dark");
+            if (meta) meta.setAttribute("content", "#fafaf9");
+          }
+        } catch (_) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-[#fafaf9] dark:bg-[#0c0d11] text-neutral-900 dark:text-neutral-100 antialiased min-h-screen flex flex-col font-sans selection:bg-orange-500/20 selection:text-orange-700 dark:selection:bg-orange-500/30 dark:selection:text-orange-300">
+    <slot />
+
+    <!-- Minimalist Toast notification -->
+    <div
+      id="global-toast"
+      class="rounded-lg border border-neutral-300 dark:border-neutral-800 bg-white/95 dark:bg-neutral-900/95 px-3.5 py-2 text-xs text-neutral-800 dark:text-neutral-200 font-mono shadow-xl backdrop-blur-md flex items-center gap-2"
+    >
+      <span class="size-1.5 rounded-full bg-emerald-500"></span>
+      <span id="toast-message">Copied</span>
+    </div>
+
+    <script is:inline>
+      // Theme toggle helper
+      window.toggleTheme = function () {
+        const isDark = document.documentElement.classList.toggle("dark");
+        try {
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+          const meta = document.getElementById("meta-theme-color");
+          if (meta) meta.setAttribute("content", isDark ? "#0c0d11" : "#fafaf9");
+        } catch (_) {}
+      };
+
+      document.getElementById("theme-toggle-desktop")?.addEventListener("click", window.toggleTheme);
+      document.getElementById("theme-toggle-mobile")?.addEventListener("click", window.toggleTheme);
+
+      // Mobile nav drawer
+      const toggleBtn = document.getElementById("mobile-nav-toggle");
+      const menu = document.getElementById("mobile-nav-menu");
+      const iconOpen = document.getElementById("menu-icon-open");
+      const iconClose = document.getElementById("menu-icon-close");
+
+      if (toggleBtn && menu) {
+        toggleBtn.addEventListener("click", () => {
+          const isHidden = menu.classList.contains("hidden");
+          if (isHidden) {
+            menu.classList.remove("hidden");
+            menu.classList.add("flex");
+            iconOpen?.classList.add("hidden");
+            iconClose?.classList.remove("hidden");
+          } else {
+            menu.classList.add("hidden");
+            menu.classList.remove("flex");
+            iconOpen?.classList.remove("hidden");
+            iconClose?.classList.add("hidden");
+          }
+        });
+
+        document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+          link.addEventListener("click", () => {
+            menu.classList.add("hidden");
+            menu.classList.remove("flex");
+            iconOpen?.classList.remove("hidden");
+            iconClose?.classList.add("hidden");
+          });
+        });
+      }
+
+      // Toast notification helper
+      let toastTimer = null;
+      window.showToast = function (msg) {
+        const toast = document.getElementById("global-toast");
+        const msgEl = document.getElementById("toast-message");
+        if (!toast || !msgEl) return;
+        msgEl.textContent = msg;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2000);
+      };
+
+      // Global copy helper
+      document.addEventListener("click", async (e) => {
+        const copyBtn = e.target.closest?.("[data-copy]");
+        if (!copyBtn) return;
+        const text = copyBtn.getAttribute("data-copy");
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          window.showToast(`Copied: ${text.length > 24 ? text.slice(0, 20) + "..." : text}`);
+
+          const icon = copyBtn.querySelector(".copy-icon");
+          if (icon) {
+            const def = icon.querySelector(".copy-default");
+            const succ = icon.querySelector(".copy-success");
+            if (def && succ) {
+              def.classList.add("hidden");
+              succ.classList.remove("hidden");
+              setTimeout(() => {
+                def.classList.remove("hidden");
+                succ.classList.add("hidden");
+              }, 1600);
             }
-            gtag("js", new Date());
-            gtag("config", "G-Q8LPP4463N");
+          }
+        } catch {
+          window.showToast("Failed to copy");
+        }
+      });
 
-            // Defer loading the external gtag.js until user interaction or browser idle
-            (function () {
-                let loaded = false;
-                function loadGtag() {
-                    if (loaded) return;
-                    loaded = true;
-                    cleanup();
-                    const s = document.createElement("script");
-                    s.src = "https://www.googletagmanager.com/gtag/js?id=G-Q8LPP4463N";
-                    s.async = true;
-                    document.head.appendChild(s);
-                }
-                const events = ["pointerdown", "scroll", "keydown", "touchstart"];
-                function cleanup() {
-                    events.forEach((e) => window.removeEventListener(e, loadGtag, { passive: true }));
-                }
-                events.forEach((e) => window.addEventListener(e, loadGtag, { passive: true, once: true }));
-                if ("requestIdleCallback" in window) {
-                    requestIdleCallback(() => setTimeout(loadGtag, 3500));
-                } else {
-                    setTimeout(loadGtag, 3500);
-                }
-            })();
-        </script>
-        <script is:inline>
-            (function () {
-                try {
-                    const stored = localStorage.getItem("theme");
-                    const meta = document.getElementById("meta-theme-color");
-                    if (stored === "dark") {
-                        document.documentElement.classList.add("dark");
-                        if (meta) meta.setAttribute("content", "#09090b");
-                    } else {
-                        document.documentElement.classList.remove("dark");
-                        if (meta) meta.setAttribute("content", "#ffffff");
-                    }
-                } catch (_) {}
-            })();
-        </script>
-    </head>
-    <body class="bg-white dark:bg-[#09090b] text-neutral-900 dark:text-neutral-100 antialiased selection:bg-orange-500/20 selection:text-orange-700 dark:selection:bg-neutral-800 dark:selection:text-white transition-colors duration-200 min-h-screen flex flex-col">
-        <slot />
-
-        <!-- Minimalist Toast notification -->
-        <div
-            id="global-toast"
-            class="rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-neutral-900/95 px-3.5 py-2 text-xs text-neutral-800 dark:text-neutral-200 font-sans shadow-2xl backdrop-blur-md flex items-center gap-2"
-        >
-            <span class="size-1.5 rounded-full bg-emerald-400"></span>
-            <span id="toast-message">Copied</span>
-        </div>
-
-        <script is:inline>
-            // Theme toggle helper
-            function toggleTheme() {
-                const isDark = document.documentElement.classList.toggle("dark");
-                try {
-                    localStorage.setItem("theme", isDark ? "dark" : "light");
-                    const meta = document.getElementById("meta-theme-color");
-                    if (meta) meta.setAttribute("content", isDark ? "#09090b" : "#ffffff");
-                } catch (_) {}
-            }
-
-            document.getElementById("theme-toggle-desktop")?.addEventListener("click", toggleTheme);
-            document.getElementById("theme-toggle-mobile")?.addEventListener("click", toggleTheme);
-
-            // Mobile navigation menu toggle
-            const toggleBtn = document.getElementById("mobile-nav-toggle");
-            const menu = document.getElementById("mobile-nav-menu");
-            const iconOpen = document.getElementById("menu-icon-open");
-            const iconClose = document.getElementById("menu-icon-close");
-
-            if (toggleBtn && menu) {
-                toggleBtn.addEventListener("click", () => {
-                    const isHidden = menu.classList.contains("hidden");
-                    if (isHidden) {
-                        menu.classList.remove("hidden");
-                        menu.classList.add("flex");
-                        iconOpen?.classList.add("hidden");
-                        iconClose?.classList.remove("hidden");
-                    } else {
-                        menu.classList.add("hidden");
-                        menu.classList.remove("flex");
-                        iconOpen?.classList.remove("hidden");
-                        iconClose?.classList.add("hidden");
-                    }
+      // Active Section Navigation Observer
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll(".nav-anchor");
+      if ("IntersectionObserver" in window && sections.length > 0) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const id = entry.target.getAttribute("id");
+                navLinks.forEach((link) => {
+                  const href = link.getAttribute("href");
+                  if (href === `#${id}`) {
+                    link.classList.add("text-orange-600", "dark:text-orange-400", "font-medium");
+                  } else {
+                    link.classList.remove("text-orange-600", "dark:text-orange-400", "font-medium");
+                  }
                 });
-
-                document.querySelectorAll(".mobile-nav-link").forEach((link) => {
-                    link.addEventListener("click", () => {
-                        menu.classList.add("hidden");
-                        menu.classList.remove("flex");
-                        iconOpen?.classList.remove("hidden");
-                        iconClose?.classList.add("hidden");
-                    });
-                });
-            }
-
-            // Toast notification helper
-            let toastTimer = null;
-            function showToast(msg) {
-                const toast = document.getElementById("global-toast");
-                const msgEl = document.getElementById("toast-message");
-                if (!toast || !msgEl) return;
-                msgEl.textContent = msg;
-                toast.classList.add("show");
-                clearTimeout(toastTimer);
-                toastTimer = setTimeout(() => {
-                    toast.classList.remove("show");
-                }, 2000);
-            }
-
-            // Global copy helper
-            document.addEventListener("click", async (e) => {
-                const copyBtn = e.target.closest?.("[data-copy]");
-                if (!copyBtn) return;
-                const text = copyBtn.getAttribute("data-copy");
-                if (!text) return;
-                try {
-                    await navigator.clipboard.writeText(text);
-                    showToast(
-                        `Copied ${text.length > 24 ? text.slice(0, 20) + "..." : text}`,
-                    );
-
-                    const icon = copyBtn.querySelector(".copy-icon");
-                    if (icon) {
-                        const def = icon.querySelector(".copy-default");
-                        const succ = icon.querySelector(".copy-success");
-                        if (def && succ) {
-                            def.classList.add("hidden");
-                            succ.classList.remove("hidden");
-                            setTimeout(() => {
-                                def.classList.remove("hidden");
-                                succ.classList.add("hidden");
-                            }, 1800);
-                        }
-                    }
-                } catch {
-                    showToast("Failed to copy");
-                }
+              }
             });
-        </script>
-    </body>
+          },
+          { rootMargin: "-20% 0px -60% 0px" }
+        );
+        sections.forEach((sec) => observer.observe(sec));
+      }
+    </script>
+  </body>
 </html>
