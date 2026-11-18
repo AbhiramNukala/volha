@@ -11,10 +11,10 @@ interface Props {
 const { id, number, kicker, title, subtitle, class: className = "" } = Astro.props;
 ---
 
-<section id={id} class={`w-full py-12 sm:py-16 border-t border-neutral-200 dark:border-neutral-800 font-sans ${className}`}>
+<section id={id} class={`w-full py-7 sm:py-9 border-t border-neutral-200 dark:border-neutral-800 font-sans ${className}`}>
   <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-    <div class="mb-8 sm:mb-12">
-      <div class="flex items-center gap-2 mb-2 font-mono text-xs text-neutral-500 uppercase tracking-widest">
+    <div class="mb-5 sm:mb-6">
+      <div class="flex items-center gap-2 mb-1.5 font-mono text-xs text-neutral-500 uppercase tracking-widest">
         {number && <span class="text-orange-600 dark:text-orange-400 font-semibold">{number}</span>}
         {number && kicker && <span>·</span>}
         {kicker && <span>{kicker}</span>}
@@ -25,7 +25,7 @@ const { id, number, kicker, title, subtitle, class: className = "" } = Astro.pro
       </h2>
 
       {subtitle && (
-        <p class="mt-2 text-sm sm:text-base text-neutral-600 dark:text-neutral-400 max-w-3xl leading-relaxed">
+        <p class="mt-1.5 text-sm sm:text-base text-neutral-600 dark:text-neutral-400 max-w-3xl leading-relaxed">
           {subtitle}
         </p>
       )}

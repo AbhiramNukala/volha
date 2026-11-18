@@ -17,8 +17,8 @@ const tickerGroups = Object.entries(skills).map(([category, items]) => ({
   subtitle="Technologies and tooling used across production web applications, mobile architectures, and native modules."
 >
   <!-- Mobile & Mid-sized Devices: Clean Marquee Ticker -->
-  <div class="block lg:hidden w-full overflow-hidden ticker-mask py-3 border-y border-neutral-200 dark:border-neutral-800 bg-neutral-100/50 dark:bg-neutral-900/50">
-    <div class="ticker-track flex items-center py-1">
+  <div class="block lg:hidden w-full overflow-hidden ticker-mask py-2 border-y border-neutral-200 dark:border-neutral-800 bg-neutral-100/50 dark:bg-neutral-900/50">
+    <div class="ticker-track flex items-center py-0.5">
       <!-- First Copy -->
       <div class="flex items-center gap-6 shrink-0 pr-6">
         {tickerGroups.map((group) => (
@@ -56,14 +56,14 @@ const tickerGroups = Object.entries(skills).map(([category, items]) => ({
   </div>
 
   <!-- Desktop Large Screens: Expansive Multi-Column Editorial Grid -->
-  <div class="hidden lg:grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6 sm:gap-8 font-sans">
+  <div class="hidden lg:grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-5 sm:gap-6 font-sans">
     {Object.entries(skills).map(([category, items]) => (
-      <div class="space-y-3 pt-3 border-t border-neutral-200 dark:border-neutral-800">
+      <div class="space-y-2 pt-2 border-t border-neutral-200 dark:border-neutral-800">
         <h3 class="font-mono text-xs font-semibold text-neutral-900 dark:text-neutral-100 uppercase tracking-wider">
           {category}
         </h3>
 
-        <ul class="space-y-1.5 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-snug">
+        <ul class="space-y-1 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-snug">
           {items.map((item) => (
             <li class="py-0.5 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
               {item}

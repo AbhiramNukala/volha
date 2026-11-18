@@ -12,11 +12,11 @@ import { ArrowUpRight, Copy, Check } from "lucide-astro";
   subtitle="Open-source React Native modules and client applications built with C++ JSI and modern web standards."
 >
   <!-- Card-free Open Editorial Spread -->
-  <div class="space-y-12 sm:space-y-16 font-sans">
+  <div class="space-y-8 sm:space-y-10 font-sans">
     {projects.map((project) => (
-      <article class="pt-8 border-t border-neutral-200 dark:border-neutral-800 first:border-t-0 first:pt-0 space-y-4">
+      <article class="pt-5 border-t border-neutral-200 dark:border-neutral-800 first:border-t-0 first:pt-0 space-y-3">
         <!-- Header -->
-        <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 pb-1">
+        <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 pb-0.5">
           <div>
             <div class="flex items-baseline gap-2">
               <h3 class="font-serif text-3xl sm:text-4xl font-normal text-neutral-950 dark:text-white tracking-tight">
@@ -43,7 +43,7 @@ import { ArrowUpRight, Copy, Check } from "lucide-astro";
 
         <!-- Install Command Bar (Clean hairline terminal style) -->
         {project.install && (
-          <div class="pt-1">
+          <div class="pt-0.5">
             <button
               type="button"
               data-copy={project.install}
@@ -61,7 +61,7 @@ import { ArrowUpRight, Copy, Check } from "lucide-astro";
         )}
 
         <!-- Stack & Links Row -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-neutral-100 dark:border-neutral-800/80 text-xs font-mono">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2.5 border-t border-neutral-100 dark:border-neutral-800/80 text-xs font-mono">
           <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-neutral-500">
             <span class="text-[10px] uppercase tracking-wider text-neutral-400 font-semibold mr-1">Stack:</span>
             {project.stack.map((item, i) => (

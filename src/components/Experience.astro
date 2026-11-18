@@ -12,11 +12,11 @@ import { ArrowRight, Dot } from "lucide-astro";
   subtitle="Production engineering roles focused on React.js web apps and React Native iOS and Android systems."
 >
   <!-- Card-free Open Editorial Timeline -->
-  <div class="space-y-16 sm:space-y-20 font-sans">
+  <div class="space-y-10 sm:space-y-12 font-sans">
     {experience.map((job) => (
-      <div class="grid lg:grid-cols-12 gap-8 lg:gap-16 pt-8 border-t border-neutral-200 dark:border-neutral-800 first:border-t-0 first:pt-0">
+      <div class="grid lg:grid-cols-12 gap-6 lg:gap-14 pt-5 border-t border-neutral-200 dark:border-neutral-800 first:border-t-0 first:pt-0">
         <!-- Left Column: Company & Role Information -->
-        <div class="lg:col-span-4 space-y-2 lg:sticky lg:top-24 self-start">
+        <div class="lg:col-span-4 space-y-1.5 lg:sticky lg:top-20 self-start">
           <h3 class="font-serif text-3xl sm:text-4xl font-normal text-neutral-950 dark:text-white tracking-tight">
             {job.company}
           </h3>
@@ -33,9 +33,9 @@ import { ArrowRight, Dot } from "lucide-astro";
         </div>
 
         <!-- Right Column: Projects & Bulleted Achievements -->
-        <div class="lg:col-span-8 space-y-12">
+        <div class="lg:col-span-8 space-y-8">
           {job.projects.map((project) => (
-            <div class="space-y-3.5 pb-8 sm:pb-10 border-b border-neutral-200/80 dark:border-neutral-800/80 last:border-b-0 last:pb-0">
+            <div class="space-y-2.5 pb-5 sm:pb-6 border-b border-neutral-200/80 dark:border-neutral-800/80 last:border-b-0 last:pb-0">
               <!-- Project Header -->
               <div class="space-y-1">
                 <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
@@ -59,9 +59,9 @@ import { ArrowRight, Dot } from "lucide-astro";
               </div>
 
               <!-- Bullet Points with breathing room -->
-              <ul class="space-y-3 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed pt-1">
+              <ul class="space-y-2 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed pt-0.5">
                 {project.points.map((pt) => (
-                  <li class="flex items-start gap-3">
+                  <li class="flex items-start gap-2.5">
                     <ArrowRight class="size-3.5 text-neutral-400 dark:text-neutral-500 shrink-0 mt-1" />
                     <span>{pt}</span>
                   </li>

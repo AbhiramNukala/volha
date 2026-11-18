@@ -14,8 +14,8 @@ import { Copy, Check } from "lucide-astro";
   subtitle="Feel free to reach out directly regarding full-time roles, engineering opportunities, or technical inquiries."
 >
   <!-- Clean, Uncluttered Editorial Contact Spread -->
-  <div class="space-y-6 pt-6 border-t border-neutral-200 dark:border-neutral-800 font-sans">
-    <div class="space-y-3">
+  <div class="space-y-4 pt-4 border-t border-neutral-200 dark:border-neutral-800 font-sans">
+    <div class="space-y-2">
       <div class="flex items-center gap-2 text-xs font-mono text-neutral-500">
         <span class="inline-block size-2 rounded-full bg-emerald-500 animate-pulse"></span>
         <span class="uppercase tracking-widest font-semibold text-[11px]">Direct Email</span>
@@ -24,7 +24,7 @@ import { Copy, Check } from "lucide-astro";
       </div>
 
       <!-- Large Editorial Email Display with Pointing Hand Graphic -->
-      <div class="flex flex-wrap items-center gap-4 pt-1">
+      <div class="flex flex-wrap items-center gap-3.5 pt-0.5">
         <!-- Finger Gun Pointer Illustration -->
         <div class="hidden sm:block select-none transform rotate-6 hover:scale-110 transition-transform">
           <Image
@@ -32,7 +32,7 @@ import { Copy, Check } from "lucide-astro";
             alt="Hand pointing towards email"
             width={48}
             height={44}
-            class="w-10 sm:w-12 h-auto object-contain filter drop-shadow-sm"
+            class="w-9 sm:w-11 h-auto object-contain filter drop-shadow-sm"
           />
         </div>
 
@@ -46,7 +46,7 @@ import { Copy, Check } from "lucide-astro";
         <button
           type="button"
           data-copy={personal.email}
-          class="p-2.5 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors cursor-pointer shrink-0"
+          class="p-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors cursor-pointer shrink-0"
           title="Copy email to clipboard"
         >
           <span class="copy-icon inline-flex items-center">
