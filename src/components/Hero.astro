@@ -2,15 +2,15 @@
 import { Image } from "astro:assets";
 import einsteinImg from "../assets/stickers/einstein.webp";
 import { personal } from "../data";
-import { ArrowDown, ArrowRight, Copy, Check } from "lucide-astro";
+import { ArrowDown, Copy, Check } from "lucide-astro";
 ---
 
 <section id="top" class="w-full pt-6 sm:pt-8 pb-6 sm:pb-8 font-sans">
-  <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-6">
+  <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
     <!-- Wide Open Editorial Hero Layout -->
-    <div class="grid lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-      <!-- Left Column: Typography, Summary & Metrics -->
-      <div class="lg:col-span-7 xl:col-span-8 space-y-4">
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+      <!-- Left Column: Headline, Summary & Navigation Links -->
+      <div class="lg:col-span-7 xl:col-span-8 space-y-5">
         <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-normal text-neutral-950 dark:text-white leading-[1.05] tracking-tight">
           Building{" "}
           <span class="italic text-orange-600 dark:text-orange-400">
@@ -27,19 +27,8 @@ import { ArrowDown, ArrowRight, Copy, Check } from "lucide-astro";
           {personal.summary}
         </p>
 
-        <!-- Clean Metric Highlights -->
-        <div class="flex flex-wrap items-center gap-x-5 gap-y-1.5 pt-2 text-xs font-mono text-neutral-600 dark:text-neutral-400 border-t border-neutral-200/80 dark:border-neutral-800/80">
-          <span><strong class="text-neutral-950 dark:text-white">4h → 25m</strong> Store Releases</span>
-          <span class="text-neutral-300 dark:text-neutral-700 select-none hidden sm:inline">/</span>
-          <span><strong class="text-neutral-950 dark:text-white">C++ Nitro</strong> Modules (JSI)</span>
-          <span class="text-neutral-300 dark:text-neutral-700 select-none hidden sm:inline">/</span>
-          <span><strong class="text-neutral-950 dark:text-white">≥99.5%</strong> Crash-Free</span>
-          <span class="text-neutral-300 dark:text-neutral-700 select-none hidden sm:inline">/</span>
-          <span><strong class="text-neutral-950 dark:text-white">60 FPS</strong> Hermes Tuning</span>
-        </div>
-
         <!-- Navigation & Quick Links -->
-        <div class="pt-3.5 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-xs sm:text-sm font-sans border-t border-neutral-200/80 dark:border-neutral-800/80">
+        <div class="pt-4 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-xs sm:text-sm font-sans border-t border-neutral-200/80 dark:border-neutral-800/80">
           <a
             href="#experience"
             class="inline-flex items-center gap-1.5 font-medium text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 transition-colors group"
@@ -79,10 +68,9 @@ import { ArrowDown, ArrowRight, Copy, Check } from "lucide-astro";
         </div>
       </div>
 
-      <!-- Right Column: Einstein Artwork Centered with Witty Note & Clean Index -->
-      <div class="lg:col-span-5 xl:col-span-4 flex flex-col justify-between space-y-6 pt-0">
-        <!-- Einstein Feature Image Centered with Right-Aligned Citation -->
-        <div class="flex flex-col items-center justify-center text-center space-y-2.5 group select-none w-full">
+      <!-- Right Column: Einstein Artwork Centered with Witty Note -->
+      <div class="lg:col-span-5 xl:col-span-4 flex flex-col items-center justify-center pt-2 lg:pt-0">
+        <div class="flex flex-col items-center justify-center text-center space-y-3 group select-none w-full">
           <div class="flex justify-center items-center w-full">
             <Image
               src={einsteinImg}
@@ -104,41 +92,6 @@ import { ArrowDown, ArrowRight, Copy, Check } from "lucide-astro";
               — THEORY OF RELATIVE DEBUGGING
             </p>
           </div>
-        </div>
-
-        <!-- High-Visibility Editorial Index -->
-        <div class="space-y-0.5 font-mono text-xs sm:text-sm border-t border-neutral-200/80 dark:border-neutral-800/80 pt-3">
-          <span class="text-[10px] uppercase tracking-widest text-neutral-400 block mb-1.5 font-semibold">
-            Index
-          </span>
-          <a
-            href="#about"
-            class="group flex items-center justify-between py-1.5 border-b border-neutral-100 dark:border-neutral-800/60 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors"
-          >
-            <span class="font-medium">01 / Technical Skills</span>
-            <ArrowRight class="size-4 text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-1 transition-all shrink-0" stroke-width={2} />
-          </a>
-          <a
-            href="#experience"
-            class="group flex items-center justify-between py-1.5 border-b border-neutral-100 dark:border-neutral-800/60 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors"
-          >
-            <span class="font-medium">02 / Experience</span>
-            <ArrowRight class="size-4 text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-1 transition-all shrink-0" stroke-width={2} />
-          </a>
-          <a
-            href="#work"
-            class="group flex items-center justify-between py-1.5 border-b border-neutral-100 dark:border-neutral-800/60 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors"
-          >
-            <span class="font-medium">03 / Selected Projects</span>
-            <ArrowRight class="size-4 text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-1 transition-all shrink-0" stroke-width={2} />
-          </a>
-          <a
-            href="#contact"
-            class="group flex items-center justify-between py-1.5 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors"
-          >
-            <span class="font-medium">04 / Contact</span>
-            <ArrowRight class="size-4 text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-1 transition-all shrink-0" stroke-width={2} />
-          </a>
         </div>
       </div>
     </div>
