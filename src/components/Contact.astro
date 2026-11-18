@@ -1,44 +1,39 @@
 ---
+import { Image } from "astro:assets";
 import Section from "./Section.astro";
 import { personal } from "../data";
-import StickerComponent from "./Sticker.astro";
-import { ArrowUpRight, Copy, Check, Dot } from "lucide-astro";
+import handImg from "../assets/stickers/hand.webp";
+import { Copy, Check } from "lucide-astro";
 ---
 
 <Section
   id="contact"
   number="04"
-  kicker="Contact & Opportunities"
+  kicker="Contact"
   title="Get in Touch"
   subtitle="Feel free to reach out directly regarding full-time roles, engineering opportunities, or technical inquiries."
 >
-  <!-- Card-free Open Editorial Spread -->
-  <div class="space-y-8 pt-4 border-t border-neutral-200 dark:border-neutral-800 font-sans">
-    <!-- Starry Night Ripped Canvas Strip & Response Status -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
-      <div class="flex items-center gap-3 select-none">
-        <StickerComponent name="starryNight" size="custom" class="w-40 sm:w-52 h-auto" interactive={true} rotation={-1} />
-        <span class="text-xs font-mono text-neutral-500 uppercase tracking-wider hidden sm:inline-block">
-          Open to Opportunities
-        </span>
-      </div>
-
+  <!-- Clean, Uncluttered Editorial Contact Spread -->
+  <div class="space-y-6 pt-6 border-t border-neutral-200 dark:border-neutral-800 font-sans">
+    <div class="space-y-3">
       <div class="flex items-center gap-2 text-xs font-mono text-neutral-500">
-        <div class="size-2 rounded-full bg-emerald-500 animate-pulse"></div>
+        <span class="inline-block size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="uppercase tracking-widest font-semibold text-[11px]">Direct Email</span>
+        <span>·</span>
         <span>Replies within 24 hours</span>
       </div>
-    </div>
 
-    <!-- Massive Typographic Email Display with Finger Gun Pointer -->
-    <div class="py-4 space-y-3">
-      <span class="text-[11px] font-mono text-neutral-500 uppercase tracking-widest block font-semibold">
-        Direct Email
-      </span>
-
-      <div class="flex flex-wrap items-center gap-4">
-        <!-- Finger Gun Sticker pointing at email -->
-        <div class="transform rotate-6 hover:scale-110 transition-transform select-none hidden sm:block">
-          <StickerComponent name="hand" size="xs" interactive={true} />
+      <!-- Large Editorial Email Display with Pointing Hand Graphic -->
+      <div class="flex flex-wrap items-center gap-4 pt-1">
+        <!-- Finger Gun Pointer Illustration -->
+        <div class="hidden sm:block select-none transform rotate-6 hover:scale-110 transition-transform">
+          <Image
+            src={handImg}
+            alt="Hand pointing towards email"
+            width={48}
+            height={44}
+            class="w-10 sm:w-12 h-auto object-contain filter drop-shadow-sm"
+          />
         </div>
 
         <a
@@ -59,50 +54,6 @@ import { ArrowUpRight, Copy, Check, Dot } from "lucide-astro";
             <Check class="size-4 text-emerald-500 copy-success hidden" />
           </span>
         </button>
-      </div>
-    </div>
-
-    <!-- Verified Links & Location Footer Row -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-neutral-200/80 dark:border-neutral-800/80 text-xs font-mono text-neutral-600 dark:text-neutral-400">
-      <div class="flex items-center gap-4">
-        <a
-          href={personal.github}
-          target="_blank"
-          rel="noopener"
-          class="inline-flex items-center gap-1 text-neutral-900 hover:text-orange-600 dark:text-neutral-200 dark:hover:text-orange-400 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 transition-colors"
-        >
-          <span>GitHub</span>
-          <ArrowUpRight class="size-3.5 text-neutral-400" />
-        </a>
-
-        <span class="text-neutral-300 dark:text-neutral-700 select-none">/</span>
-
-        <a
-          href={personal.linkedin}
-          target="_blank"
-          rel="noopener"
-          class="inline-flex items-center gap-1 text-neutral-900 hover:text-orange-600 dark:text-neutral-200 dark:hover:text-orange-400 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 transition-colors"
-        >
-          <span>LinkedIn</span>
-          <ArrowUpRight class="size-3.5 text-neutral-400" />
-        </a>
-
-        <span class="text-neutral-300 dark:text-neutral-700 select-none">/</span>
-
-        <a
-          href={personal.npm}
-          target="_blank"
-          rel="noopener"
-          class="inline-flex items-center gap-1 text-neutral-900 hover:text-orange-600 dark:text-neutral-200 dark:hover:text-orange-400 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 transition-colors"
-        >
-          <span>npm</span>
-          <ArrowUpRight class="size-3.5 text-neutral-400" />
-        </a>
-      </div>
-
-      <div class="flex items-center gap-2 text-neutral-500">
-        <StickerComponent name="dove" size="xs" interactive={true} />
-        <span>{personal.location} · UTC+05:30 (IST)</span>
       </div>
     </div>
   </div>

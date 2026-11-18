@@ -1,13 +1,14 @@
 ---
+import { Image } from "astro:assets";
 import Section from "./Section.astro";
 import { projects } from "../data";
-import StickerComponent from "./Sticker.astro";
-import { ArrowUpRight, Copy, Check, Dot } from "lucide-astro";
-import { stickers } from "../data/stickers";
+import knightImg from "../assets/stickers/knight.webp";
+import moonImg from "../assets/stickers/moon.webp";
+import { ArrowUpRight, Copy, Check } from "lucide-astro";
 
-const projectStickers: Record<string, { primary: keyof typeof stickers; secondary?: keyof typeof stickers; badge: string }> = {
-  "rn-udpb": { primary: "crown", secondary: "knight", badge: "npm Package · C++ Nitro" },
-  "Cosmos": { primary: "moon", secondary: "einstein", badge: "Open Source · Mastodon" },
+const projectVisuals: Record<string, { image: ImageMetadata; alt: string }> = {
+  "rn-udpb": { image: knightImg, alt: "Tactical Knight illustration representing C++ JSI Native Bridge" },
+  "Cosmos": { image: moonImg, alt: "Halftone Moon illustration representing decentralized timeline" },
 };
 ---
 
@@ -21,63 +22,49 @@ const projectStickers: Record<string, { primary: keyof typeof stickers; secondar
   <!-- Card-free Open Editorial Spread -->
   <div class="space-y-12 sm:space-y-16 font-sans">
     {projects.map((project, idx) => {
-      const visual = projectStickers[project.title];
+      const visual = projectVisuals[project.title];
       return (
         <article class="pt-8 border-t border-neutral-200 dark:border-neutral-800 first:border-t-0 first:pt-0 group">
-          <div class="grid lg:grid-cols-12 gap-6 lg:gap-12 items-start">
-            <!-- Left Column: Title, Subtitle, Date & Physical Sticker Stamps -->
-            <div class="lg:col-span-5 space-y-3">
-              <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
-                <span class="text-orange-600 dark:text-orange-400 font-semibold uppercase tracking-wider">
-                  0{idx + 1} · {project.date}
-                </span>
-                <span>{project.tag}</span>
+          <div class="grid lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+            <!-- Left Editorial Art Column (Real Graphic Illustration) -->
+            {visual && (
+              <div class="lg:col-span-2 hidden lg:flex flex-col items-center justify-start pt-2 select-none">
+                <Image
+                  src={visual.image}
+                  alt={visual.alt}
+                  width={120}
+                  height={130}
+                  quality={90}
+                  class="w-20 lg:w-24 h-auto object-contain filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_8px_20px_rgba(0,0,0,0.5)] transform -rotate-3 group-hover:rotate-2 group-hover:scale-105 transition-all duration-300"
+                />
               </div>
+            )}
 
-              <div class="flex items-start justify-between gap-3">
+            <!-- Main Content Column -->
+            <div class:list={[visual ? "lg:col-span-10" : "lg:col-span-12", "space-y-4"]}>
+              <!-- Header -->
+              <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 pb-1">
                 <div>
-                  <h3 class="font-serif text-3xl sm:text-4xl font-normal text-neutral-950 dark:text-white tracking-tight">
-                    {project.title}
-                  </h3>
-                  <p class="text-sm font-mono text-neutral-500 mt-1">
-                    / {project.subtitle}
+                  <div class="flex items-center gap-3">
+                    <h3 class="font-serif text-3xl sm:text-4xl font-normal text-neutral-950 dark:text-white tracking-tight">
+                      {project.title}
+                    </h3>
+                    <span class="text-xs font-mono text-neutral-500">
+                      / {project.subtitle}
+                    </span>
+                  </div>
+                  <p class="text-xs font-mono text-neutral-500 mt-0.5">
+                    {project.tag}
                   </p>
                 </div>
 
-                <!-- Halftone Sticker Stamp Accents (Integrated directly on the page) -->
-                {visual && (
-                  <div class="flex items-center -space-x-3 shrink-0 pt-1 select-none">
-                    {visual.secondary && (
-                      <div class="transform -rotate-12 group-hover:-translate-x-1 group-hover:rotate-0 transition-transform duration-300">
-                        <StickerComponent name={visual.secondary} size="xs" interactive={true} />
-                      </div>
-                    )}
-                    <div class="transform rotate-6 group-hover:scale-115 group-hover:rotate-12 transition-transform duration-300 z-10">
-                      <StickerComponent name={visual.primary} size="sm" interactive={true} />
-                    </div>
-                  </div>
-                )}
+                <div class="text-xs font-mono text-neutral-500">
+                  <span>{project.date}</span>
+                </div>
               </div>
 
-              <!-- Links -->
-              <div class="flex items-center gap-4 pt-2 font-mono text-xs">
-                {project.links.map((link) => (
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener"
-                    class="inline-flex items-center gap-1 text-neutral-800 hover:text-orange-600 dark:text-neutral-200 dark:hover:text-orange-400 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 transition-colors"
-                  >
-                    <span>{link.label}</span>
-                    <ArrowUpRight class="size-3 text-neutral-400" />
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <!-- Right Column: Description Narrative, Terminal Bar & Stack Catalog -->
-            <div class="lg:col-span-7 space-y-4">
-              <p class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans">
+              <!-- Description Narrative -->
+              <p class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans max-w-4xl">
                 {project.blurb}
               </p>
 
@@ -100,19 +87,35 @@ const projectStickers: Record<string, { primary: keyof typeof stickers; secondar
                 </div>
               )}
 
-              <!-- Tech Stack Tags -->
-              <div class="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-neutral-500 pt-2 border-t border-neutral-100 dark:border-neutral-800/80">
-                <span class="text-[10px] uppercase tracking-wider text-neutral-400 font-semibold mr-1">Stack:</span>
-                {project.stack.map((item, i) => (
-                  <>
-                    <span class="text-neutral-700 dark:text-neutral-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                      {item}
-                    </span>
-                    {i < project.stack.length - 1 && (
-                      <span class="text-neutral-300 dark:text-neutral-700 select-none">·</span>
-                    )}
-                  </>
-                ))}
+              <!-- Stack & Links Row -->
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-neutral-100 dark:border-neutral-800/80 text-xs font-mono">
+                <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-neutral-500">
+                  <span class="text-[10px] uppercase tracking-wider text-neutral-400 font-semibold mr-1">Stack:</span>
+                  {project.stack.map((item, i) => (
+                    <>
+                      <span class="text-neutral-700 dark:text-neutral-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                        {item}
+                      </span>
+                      {i < project.stack.length - 1 && (
+                        <span class="text-neutral-300 dark:text-neutral-700 select-none">·</span>
+                      )}
+                    </>
+                  ))}
+                </div>
+
+                <div class="flex items-center gap-4 shrink-0">
+                  {project.links.map((link) => (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener"
+                      class="inline-flex items-center gap-1 text-neutral-900 hover:text-orange-600 dark:text-neutral-200 dark:hover:text-orange-400 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 transition-colors"
+                    >
+                      <span>{link.label}</span>
+                      <ArrowUpRight class="size-3 text-neutral-400" />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

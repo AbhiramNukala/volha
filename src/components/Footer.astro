@@ -1,41 +1,78 @@
 ---
 import { Image } from "astro:assets";
 import tiger from "../assets/stickers/tiger.webp";
-import { Command } from "lucide-astro";
+import { Command, ArrowUpRight } from "lucide-astro";
 import { personal } from "../data";
 ---
 
-<footer class="w-full py-8 border-t border-neutral-200/80 dark:border-neutral-800/80 font-sans text-xs text-neutral-500 bg-transparent">
-  <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<footer class="w-full py-10 border-t border-neutral-200/80 dark:border-neutral-800/80 font-sans text-xs text-neutral-500 bg-transparent mt-12">
+  <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col md:flex-row md:items-center justify-between gap-6">
+    <!-- Brand, Name & Single Official Location / Timezone Display -->
     <div class="flex items-center gap-3">
-      <div class="transform -rotate-6 hover:rotate-6 transition-transform">
+      <div class="transform -rotate-6 hover:rotate-6 transition-transform select-none">
         <Image
           src={tiger}
           alt="Tiger mascot"
-          width={28}
-          height={28}
+          width={32}
+          height={32}
           quality={90}
           loading="lazy"
           decoding="async"
-          class="w-6 h-auto aspect-square object-contain select-none filter drop-shadow-xs"
+          class="w-7 h-auto aspect-square object-contain filter drop-shadow-xs"
         />
       </div>
-      <p class="flex items-center gap-1.5">
-        <span class="font-medium text-neutral-800 dark:text-neutral-200">{personal.name}</span>
-        <span>·</span>
-        <span>Hyderabad, India</span>
-      </p>
+      <div>
+        <p class="font-medium text-neutral-900 dark:text-neutral-100">
+          {personal.name}
+        </p>
+        <p class="text-[11px] font-mono text-neutral-500">
+          {personal.location} · IST (UTC+05:30)
+        </p>
+      </div>
     </div>
 
-    <div class="flex items-center gap-4">
+    <!-- Social Links moved cleanly to Footer -->
+    <div class="flex flex-wrap items-center gap-5 font-mono text-xs">
+      <a
+        href={personal.github}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-1 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors group"
+      >
+        <span>GitHub</span>
+        <ArrowUpRight class="size-3 text-neutral-400 group-hover:text-orange-500" />
+      </a>
+
+      <a
+        href={personal.linkedin}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-1 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors group"
+      >
+        <span>LinkedIn</span>
+        <ArrowUpRight class="size-3 text-neutral-400 group-hover:text-orange-500" />
+      </a>
+
+      <a
+        href={personal.npm}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-1 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors group"
+      >
+        <span>npm</span>
+        <ArrowUpRight class="size-3 text-neutral-400 group-hover:text-orange-500" />
+      </a>
+
+      <span class="text-neutral-300 dark:text-neutral-700 select-none hidden sm:inline">·</span>
+
       <button
         type="button"
         data-command-trigger
         onclick="window.openCommandPalette && window.openCommandPalette()"
-        class="inline-flex items-center gap-1 text-[11px] font-mono text-neutral-500 hover:text-orange-600 dark:hover:text-orange-400 transition-colors cursor-pointer"
+        class="inline-flex items-center gap-1.5 text-[11px] font-mono text-neutral-500 hover:text-orange-600 dark:hover:text-orange-400 transition-colors cursor-pointer"
       >
         <Command class="size-3" />
-        <span>Command Menu (⌘K)</span>
+        <span>Menu (⌘K)</span>
       </button>
     </div>
   </div>
