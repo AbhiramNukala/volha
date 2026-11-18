@@ -1,7 +1,17 @@
 ---
 import Section from "./Section.astro";
 import { experience } from "../data";
+import StickerComponent from "./Sticker.astro";
 import { ArrowRight, Dot } from "lucide-astro";
+import { stickers } from "../data/stickers";
+
+// Match projects with their symbolic sticker
+const projectStickers: Record<string, { slug: keyof typeof stickers; badge: string }> = {
+  "Estimate AI": { slug: "statue", badge: "Access Control & Estimates" },
+  "Musidy": { slug: "king", badge: "4-Tier RBAC & Dashboards" },
+  "MedicalShare": { slug: "exclamation", badge: "4h → 25m Build Velocity" },
+  "Brahma Varidi": { slug: "clover", badge: "Sole MVP in 4 Weeks" },
+};
 ---
 
 <Section
@@ -11,61 +21,94 @@ import { ArrowRight, Dot } from "lucide-astro";
   title="Professional Experience"
   subtitle="Production engineering roles focused on React.js web apps and React Native iOS and Android systems."
 >
+  <!-- Card-free Open Editorial Timeline -->
   <div class="space-y-16 sm:space-y-20 font-sans">
     {experience.map((job) => (
       <div class="grid lg:grid-cols-12 gap-8 lg:gap-16 pt-8 border-t border-neutral-200 dark:border-neutral-800 first:border-t-0 first:pt-0">
-        <!-- Left Column: Company & Role Information -->
-        <div class="lg:col-span-4 space-y-2 lg:sticky lg:top-24 self-start">
-          <h3 class="font-serif text-3xl sm:text-4xl font-normal text-neutral-950 dark:text-white tracking-tight">
-            {job.company}
-          </h3>
-          <p class="text-sm font-medium text-neutral-800 dark:text-neutral-200">
-            {job.role}
-          </p>
-          <div class="flex flex-wrap items-center gap-1 font-mono text-xs text-neutral-500 pt-0.5">
-            <span>{job.period}</span>
-            <Dot class="size-3 -mx-1 text-neutral-400 dark:text-neutral-600" />
-            <span>{job.place}</span>
+        <!-- Left Column: Company & Role Information (Clean typography, no card containers) -->
+        <div class="lg:col-span-4 space-y-3 lg:sticky lg:top-24 self-start">
+          <div class="space-y-1.5">
+            <div class="flex items-center gap-3">
+              <h3 class="font-serif text-3xl sm:text-4xl font-normal text-neutral-950 dark:text-white tracking-tight">
+                {job.company}
+              </h3>
+              <!-- Subtle organic sticker stamp for the company -->
+              <div class="shrink-0">
+                {job.company.includes("Mindwave") ? (
+                  <StickerComponent name="statue" size="xs" interactive={true} rotation={-6} />
+                ) : (
+                  <StickerComponent name="clover" size="xs" interactive={true} rotation={6} />
+                )}
+              </div>
+            </div>
+
+            <p class="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+              {job.role}
+            </p>
+            <div class="flex flex-wrap items-center gap-1 font-mono text-xs text-neutral-500 pt-0.5">
+              <span>{job.period}</span>
+              <Dot class="size-3 -mx-1 text-neutral-400 dark:text-neutral-600" />
+              <span>{job.place}</span>
+            </div>
           </div>
         </div>
 
         <!-- Right Column: Projects & Bulleted Achievements -->
         <div class="lg:col-span-8 space-y-12">
-          {job.projects.map((project) => (
-            <div class="space-y-3.5 pb-8 sm:pb-10 border-b border-neutral-200/80 dark:border-neutral-800/80 last:border-b-0 last:pb-0">
-              <!-- Project Header: Stacked cleanly on mobile so words NEVER break awkwardly -->
-              <div class="space-y-1">
-                <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
-                  <h4 class="font-semibold text-base sm:text-lg text-neutral-950 dark:text-white shrink-0 tracking-tight">
-                    {project.name}
-                  </h4>
-                  <span class="text-xs font-mono text-neutral-500">
-                    / {project.meta}
-                  </span>
+          {job.projects.map((project) => {
+            const projectBadge = projectStickers[project.name];
+            return (
+              <div class="space-y-3.5 pb-8 sm:pb-10 border-b border-neutral-200/80 dark:border-neutral-800/80 last:border-b-0 last:pb-0 relative group">
+                <!-- Project Header -->
+                <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                  <div class="space-y-1">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+                      <h4 class="font-semibold text-base sm:text-lg text-neutral-950 dark:text-white shrink-0 tracking-tight">
+                        {project.name}
+                      </h4>
+                      <span class="text-xs font-mono text-neutral-500">
+                        / {project.meta}
+                      </span>
+                    </div>
+
+                    <!-- Tech Stack tags with clean spacing -->
+                    <div class="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 font-mono text-[11px] text-neutral-500 pt-0.5">
+                      {project.tech.map((t, idx) => (
+                        <>
+                          <span>{t}</span>
+                          {idx < project.tech.length - 1 && <span class="text-neutral-300 dark:text-neutral-700 select-none">·</span>}
+                        </>
+                      ))}
+                    </div>
+                  </div>
+
+                  <!-- Project Emblem Badge (Direct inline stamp, no box) -->
+                  {projectBadge && (
+                    <div class="flex items-center gap-2 self-start shrink-0 pt-0.5 select-none">
+                      <span class="hidden md:inline-block text-[10px] font-mono font-medium text-neutral-500 dark:text-neutral-400">
+                        {projectBadge.badge}
+                      </span>
+                      <StickerComponent
+                        name={projectBadge.slug}
+                        size="xs"
+                        interactive={true}
+                      />
+                    </div>
+                  )}
                 </div>
 
-                <!-- Tech Stack tags with clean spacing -->
-                <div class="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 font-mono text-[11px] text-neutral-500 pt-0.5">
-                  {project.tech.map((t, idx) => (
-                    <>
-                      <span>{t}</span>
-                      {idx < project.tech.length - 1 && <span class="text-neutral-300 dark:text-neutral-700 select-none">·</span>}
-                    </>
+                <!-- Bullet Points with breathing room -->
+                <ul class="space-y-3 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed pt-1">
+                  {project.points.map((pt) => (
+                    <li class="flex items-start gap-3">
+                      <ArrowRight class="size-3.5 text-neutral-400 dark:text-neutral-500 shrink-0 mt-1" />
+                      <span>{pt}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
-
-              <!-- Bullet Points with breathing room -->
-              <ul class="space-y-3 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed pt-1">
-                {project.points.map((pt) => (
-                  <li class="flex items-start gap-3">
-                    <ArrowRight class="size-3.5 text-neutral-400 dark:text-neutral-500 shrink-0 mt-1" />
-                    <span>{pt}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     ))}

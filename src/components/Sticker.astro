@@ -1,0 +1,118 @@
+---
+import { Image } from "astro:assets";
+import { stickers, type Sticker as StickerType } from "../data/stickers";
+
+interface Props {
+  name: keyof typeof stickers;
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "custom";
+  class?: string;
+  rotation?: number;
+  interactive?: boolean;
+  showBadge?: boolean;
+  badgePosition?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
+  alt?: string;
+  loading?: "lazy" | "eager";
+  draggable?: boolean;
+}
+
+const {
+  name,
+  size = "md",
+  class: className = "",
+  rotation,
+  interactive = true,
+  showBadge = false,
+  badgePosition = "bottom-right",
+  alt,
+  loading = "lazy",
+  draggable = false,
+} = Astro.props;
+
+const sticker: StickerType | undefined = stickers[name];
+if (!sticker) {
+  throw new Error(`Sticker "${name}" not found in stickers data.`);
+}
+
+const rot = rotation !== undefined ? rotation : sticker.rotation;
+
+const sizeClasses = {
+  xs: "w-8 h-auto",
+  sm: "w-12 sm:w-14 h-auto",
+  md: "w-20 sm:w-24 h-auto",
+  lg: "w-28 sm:w-36 h-auto",
+  xl: "w-44 sm:w-56 h-auto",
+  custom: "",
+};
+
+const badgePositions = {
+  "top-left": "-top-2 -left-2",
+  "top-right": "-top-2 -right-2",
+  "bottom-left": "-bottom-2 -left-2",
+  "bottom-right": "-bottom-2 -right-2",
+};
+---
+
+<div
+  class:list={[
+    "sticker-wrapper inline-block relative select-none",
+    interactive && "sticker-interactive",
+    draggable && "sticker-draggable",
+    className,
+  ]}
+  style={`--sticker-rot: ${rot}deg;`}
+  data-sticker-slug={sticker.slug}
+  data-sticker-name={sticker.name}
+  data-sticker-tagline={sticker.tagline}
+  data-sticker-badge={sticker.badgeText}
+>
+  <div
+    class="sticker-inner transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] transform"
+    style={`transform: rotate(${rot}deg);`}
+  >
+    <Image
+      src={sticker.image}
+      alt={alt || sticker.name}
+      quality={90}
+      loading={loading}
+      decoding="async"
+      class:list={[
+        "sticker-image object-contain pointer-events-auto",
+        "drop-shadow-[0_4px_8px_rgba(0,0,0,0.16)] dark:drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]",
+        "filter contrast-105",
+        sizeClasses[size],
+      ]}
+    />
+
+    {showBadge && (
+      <span
+        class:list={[
+          "absolute font-mono text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded shadow-sm border",
+          "bg-white/95 dark:bg-neutral-900/95 text-neutral-800 dark:text-neutral-200 border-neutral-300/80 dark:border-neutral-700/80",
+          badgePositions[badgePosition],
+        ]}
+      >
+        {sticker.badgeText}
+      </span>
+    )}
+  </div>
+</div>
+
+<style>
+  .sticker-interactive:hover .sticker-inner {
+    transform: scale(1.08) rotate(calc(var(--sticker-rot, 0deg) + 2deg)) translateY(-3px) !important;
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.22));
+  }
+
+  .sticker-interactive:active .sticker-inner {
+    transform: scale(0.96) rotate(var(--sticker-rot, 0deg)) !important;
+  }
+
+  .sticker-draggable {
+    cursor: grab;
+    touch-action: none;
+  }
+
+  .sticker-draggable:active {
+    cursor: grabbing;
+  }
+</style>

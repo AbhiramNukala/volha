@@ -1,3 +1,21 @@
+// Dynamically calculated engineering experience from May 2024 to present
+export function calculateExperience(startDate = new Date(2024, 4, 1)) {
+  const now = new Date();
+  const diffMonths =
+    (now.getFullYear() - startDate.getFullYear()) * 12 +
+    (now.getMonth() - startDate.getMonth());
+  const years = (diffMonths / 12).toFixed(1);
+  const formatted = years.endsWith(".0") ? `${parseInt(years, 10)}` : years;
+  return {
+    months: diffMonths,
+    yearsNumber: diffMonths / 12,
+    yearsText: `${formatted} years`,
+    yearsPlus: `${formatted}+ years`,
+  };
+}
+
+export const exp = calculateExperience();
+
 export const personal = {
   name: "Nukala Abhiram",
   title: "Software Engineer — React.js & React Native",
@@ -6,8 +24,7 @@ export const personal = {
   github: "https://github.com/AbhiramNukala",
   linkedin: "https://www.linkedin.com/in/nukala-abhiram-0a1828255",
   npm: "https://www.npmjs.com/~thedummyuser",
-  summary:
-    "Software Engineer with 2.5 years of experience building production React.js web applications and React Native iOS/Android apps in TypeScript. Delivered admin dashboards, role-based access control, mobile payments, and store releases. Comfortable across the stack from UI and state management to native modules; published an open-source C++/JSI Nitro Module for React Native.",
+  summary: `Software Engineer with ${exp.yearsPlus} of experience building production React.js web applications and React Native iOS/Android apps in TypeScript. Delivered admin dashboards, role-based access control, mobile payments, and store releases. Comfortable across the stack from UI and state management to native modules; published an open-source C++/JSI Nitro Module for React Native.`,
 };
 
 export const links = {

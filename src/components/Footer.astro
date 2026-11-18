@@ -1,24 +1,27 @@
 ---
 import { Image } from "astro:assets";
-import tiger from "../assets/tiger.webp";
+import tiger from "../assets/stickers/tiger.webp";
 import { Command } from "lucide-astro";
 import { personal } from "../data";
 ---
 
 <footer class="w-full py-8 border-t border-neutral-200/80 dark:border-neutral-800/80 font-sans text-xs text-neutral-500 bg-transparent">
   <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-    <div class="flex items-center gap-2.5">
-      <Image
-        src={tiger}
-        alt="Tiger mascot"
-        width={22}
-        height={15}
-        loading="lazy"
-        decoding="async"
-        class="w-5 h-auto aspect-[22/15] object-contain select-none"
-      />
-      <p class="flex items-center gap-1">
-        <span>{personal.name}</span>
+    <div class="flex items-center gap-3">
+      <div class="transform -rotate-6 hover:rotate-6 transition-transform">
+        <Image
+          src={tiger}
+          alt="Tiger mascot"
+          width={28}
+          height={28}
+          quality={90}
+          loading="lazy"
+          decoding="async"
+          class="w-6 h-auto aspect-square object-contain select-none filter drop-shadow-xs"
+        />
+      </div>
+      <p class="flex items-center gap-1.5">
+        <span class="font-medium text-neutral-800 dark:text-neutral-200">{personal.name}</span>
         <span>·</span>
         <span>Hyderabad, India</span>
       </p>

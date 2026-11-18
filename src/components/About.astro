@@ -1,11 +1,24 @@
 ---
 import Section from "./Section.astro";
 import { skills } from "../data";
+import StickerComponent from "./Sticker.astro";
+import { stickers } from "../data/stickers";
+
+// Map each category to a matching sticker emblem
+const categoryStickers: Record<string, keyof typeof stickers> = {
+  Languages: "king",
+  Mobile: "knight",
+  Web: "flower",
+  "State & Data": "fire",
+  "Auth & Services": "car",
+  "Testing & Tooling": "clover",
+};
 
 // Flattened ticker items formatted like a news broadcast ticker
 const tickerGroups = Object.entries(skills).map(([category, items]) => ({
   category,
   text: items.join(" · "),
+  sticker: categoryStickers[category],
 }));
 ---
 
@@ -17,12 +30,15 @@ const tickerGroups = Object.entries(skills).map(([category, items]) => ({
   subtitle="Technologies and tooling used across production web applications, mobile architectures, and native modules."
 >
   <!-- Mobile & Mid-sized Devices: Single News-Channel Auto-Scroller Ticker -->
-  <div class="block lg:hidden w-full overflow-hidden ticker-mask py-2 border-y border-neutral-200 dark:border-neutral-800">
+  <div class="block lg:hidden w-full overflow-hidden ticker-mask py-3 border-y border-neutral-200 dark:border-neutral-800 bg-neutral-100/50 dark:bg-neutral-900/50">
     <div class="ticker-track flex items-center py-1">
       <!-- First Copy -->
       <div class="flex items-center gap-6 shrink-0 pr-6">
         {tickerGroups.map((group) => (
-          <div class="flex items-center gap-2 text-xs font-sans whitespace-nowrap">
+          <div class="flex items-center gap-2.5 text-xs font-sans whitespace-nowrap">
+            {group.sticker && (
+              <StickerComponent name={group.sticker} size="xs" interactive={false} class="inline-block scale-90" />
+            )}
             <span class="font-mono text-[11px] font-semibold uppercase tracking-wider text-orange-600 dark:text-orange-400">
               {group.category}:
             </span>
@@ -39,7 +55,10 @@ const tickerGroups = Object.entries(skills).map(([category, items]) => ({
       <!-- Second Copy for Seamless Infinite Loop -->
       <div class="flex items-center gap-6 shrink-0 pr-6" aria-hidden="true">
         {tickerGroups.map((group) => (
-          <div class="flex items-center gap-2 text-xs font-sans whitespace-nowrap">
+          <div class="flex items-center gap-2.5 text-xs font-sans whitespace-nowrap">
+            {group.sticker && (
+              <StickerComponent name={group.sticker} size="xs" interactive={false} class="inline-block scale-90" />
+            )}
             <span class="font-mono text-[11px] font-semibold uppercase tracking-wider text-orange-600 dark:text-orange-400">
               {group.category}:
             </span>
@@ -55,21 +74,33 @@ const tickerGroups = Object.entries(skills).map(([category, items]) => ({
     </div>
   </div>
 
-  <!-- Desktop Large Screens: Expansive Multi-Column Grid -->
+  <!-- Desktop Large Screens: Expansive Multi-Column Grid with Sticker Emblems -->
   <div class="hidden lg:grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6 sm:gap-8 font-sans">
-    {Object.entries(skills).map(([category, items]) => (
-      <div class="space-y-2 pt-2 border-t border-neutral-200 dark:border-neutral-800">
-        <h3 class="font-mono text-xs font-semibold text-neutral-900 dark:text-neutral-100 uppercase tracking-wider">
-          {category}
-        </h3>
-        <ul class="space-y-1 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-snug">
-          {items.map((item) => (
-            <li class="py-0.5">
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))}
+    {Object.entries(skills).map(([category, items]) => {
+      const stickerSlug = categoryStickers[category];
+      return (
+        <div class="space-y-3 pt-3 border-t border-neutral-200 dark:border-neutral-800 group relative">
+          <!-- Category Header with mini sticker accent -->
+          <div class="flex items-center justify-between pb-1">
+            <h3 class="font-mono text-xs font-semibold text-neutral-900 dark:text-neutral-100 uppercase tracking-wider">
+              {category}
+            </h3>
+            {stickerSlug && (
+              <div class="transform group-hover:scale-125 transition-transform duration-200">
+                <StickerComponent name={stickerSlug} size="xs" interactive={true} />
+              </div>
+            )}
+          </div>
+
+          <ul class="space-y-1.5 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-snug">
+            {items.map((item) => (
+              <li class="py-0.5 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    })}
   </div>
 </Section>

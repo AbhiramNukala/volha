@@ -1,27 +1,49 @@
 ---
 import Section from "./Section.astro";
 import { personal } from "../data";
+import StickerComponent from "./Sticker.astro";
 import { ArrowUpRight, Copy, Check, Dot } from "lucide-astro";
 ---
 
 <Section
   id="contact"
   number="04"
-  kicker="Contact"
+  kicker="Contact & Opportunities"
   title="Get in Touch"
   subtitle="Feel free to reach out directly regarding full-time roles, engineering opportunities, or technical inquiries."
 >
-  <div class="flex flex-col lg:flex-row lg:items-baseline justify-between gap-8 pt-4 border-t border-neutral-200 dark:border-neutral-800 font-sans">
-    <!-- Email Display (Responsive typography so it NEVER orphans 'm' on mobile!) -->
-    <div class="space-y-2">
+  <!-- Card-free Open Editorial Spread -->
+  <div class="space-y-8 pt-4 border-t border-neutral-200 dark:border-neutral-800 font-sans">
+    <!-- Starry Night Ripped Canvas Strip & Response Status -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
+      <div class="flex items-center gap-3 select-none">
+        <StickerComponent name="starryNight" size="custom" class="w-40 sm:w-52 h-auto" interactive={true} rotation={-1} />
+        <span class="text-xs font-mono text-neutral-500 uppercase tracking-wider hidden sm:inline-block">
+          Open to Opportunities
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2 text-xs font-mono text-neutral-500">
+        <div class="size-2 rounded-full bg-emerald-500 animate-pulse"></div>
+        <span>Replies within 24 hours</span>
+      </div>
+    </div>
+
+    <!-- Massive Typographic Email Display with Finger Gun Pointer -->
+    <div class="py-4 space-y-3">
       <span class="text-[11px] font-mono text-neutral-500 uppercase tracking-widest block font-semibold">
         Direct Email
       </span>
 
-      <div class="flex items-center gap-2.5">
+      <div class="flex flex-wrap items-center gap-4">
+        <!-- Finger Gun Sticker pointing at email -->
+        <div class="transform rotate-6 hover:scale-110 transition-transform select-none hidden sm:block">
+          <StickerComponent name="hand" size="xs" interactive={true} />
+        </div>
+
         <a
           href={`mailto:${personal.email}`}
-          class="font-serif text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 transition-colors truncate sm:overflow-visible"
+          class="font-serif text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 underline underline-offset-8 decoration-neutral-300 dark:decoration-neutral-700 hover:decoration-orange-500 transition-all truncate"
         >
           {personal.email}
         </a>
@@ -29,57 +51,58 @@ import { ArrowUpRight, Copy, Check, Dot } from "lucide-astro";
         <button
           type="button"
           data-copy={personal.email}
-          class="p-1.5 rounded text-neutral-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors cursor-pointer shrink-0"
+          class="p-2.5 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors cursor-pointer shrink-0"
           title="Copy email to clipboard"
         >
           <span class="copy-icon inline-flex items-center">
-            <Copy class="size-4 sm:size-4.5 copy-default" />
-            <Check class="size-4 sm:size-4.5 text-emerald-500 copy-success hidden" />
+            <Copy class="size-4 copy-default" />
+            <Check class="size-4 text-emerald-500 copy-success hidden" />
           </span>
         </button>
       </div>
     </div>
 
-    <!-- Verified Links & Location -->
-    <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-xs font-mono text-neutral-600 dark:text-neutral-400 shrink-0 pt-2 lg:pt-0">
-      <div class="flex items-center gap-3">
+    <!-- Verified Links & Location Footer Row -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-neutral-200/80 dark:border-neutral-800/80 text-xs font-mono text-neutral-600 dark:text-neutral-400">
+      <div class="flex items-center gap-4">
         <a
           href={personal.github}
           target="_blank"
           rel="noopener"
-          class="inline-flex items-center gap-1 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+          class="inline-flex items-center gap-1 text-neutral-900 hover:text-orange-600 dark:text-neutral-200 dark:hover:text-orange-400 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 transition-colors"
         >
           <span>GitHub</span>
           <ArrowUpRight class="size-3.5 text-neutral-400" />
         </a>
 
-        <Dot class="size-3 -mx-1 text-neutral-400 dark:text-neutral-600" />
+        <span class="text-neutral-300 dark:text-neutral-700 select-none">/</span>
 
         <a
           href={personal.linkedin}
           target="_blank"
           rel="noopener"
-          class="inline-flex items-center gap-1 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+          class="inline-flex items-center gap-1 text-neutral-900 hover:text-orange-600 dark:text-neutral-200 dark:hover:text-orange-400 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 transition-colors"
         >
           <span>LinkedIn</span>
           <ArrowUpRight class="size-3.5 text-neutral-400" />
         </a>
 
-        <Dot class="size-3 -mx-1 text-neutral-400 dark:text-neutral-600" />
+        <span class="text-neutral-300 dark:text-neutral-700 select-none">/</span>
 
         <a
           href={personal.npm}
           target="_blank"
           rel="noopener"
-          class="inline-flex items-center gap-1 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+          class="inline-flex items-center gap-1 text-neutral-900 hover:text-orange-600 dark:text-neutral-200 dark:hover:text-orange-400 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 transition-colors"
         >
           <span>npm</span>
           <ArrowUpRight class="size-3.5 text-neutral-400" />
         </a>
       </div>
 
-      <div class="flex items-center gap-1 text-neutral-500 sm:border-l sm:border-neutral-200 dark:sm:border-neutral-800 sm:pl-3">
-        <span>Hyderabad, India</span>
+      <div class="flex items-center gap-2 text-neutral-500">
+        <StickerComponent name="dove" size="xs" interactive={true} />
+        <span>{personal.location} · UTC+05:30 (IST)</span>
       </div>
     </div>
   </div>
