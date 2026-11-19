@@ -16,7 +16,7 @@ const { id, number, kicker, title, subtitle, class: className = "" } = Astro.pro
     <div class="mb-5 sm:mb-6">
       {(number || kicker) && (
         <div class="flex items-center gap-2 mb-1.5 font-mono text-xs text-neutral-500 uppercase tracking-widest">
-          {number && <span class="text-orange-600 dark:text-orange-400 font-semibold">{number}</span>}
+          {number && <span class="text-orange-700 dark:text-orange-400 font-semibold">{number}</span>}
           {number && kicker && <span>·</span>}
           {kicker && <span>{kicker}</span>}
         </div>

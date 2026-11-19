@@ -44,12 +44,17 @@ import { ArrowUp } from "lucide-astro";
     const circumference = 2 * Math.PI * 16; // 100.53
     let ticking = false;
     let scrollHeight = 0;
+    let metricsDirty = true;
 
     function updateMetrics() {
       scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      metricsDirty = false;
     }
 
     function onScroll() {
+      if (metricsDirty) {
+        updateMetrics();
+      }
       if (!ticking) {
         requestAnimationFrame(() => {
           const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -77,12 +82,19 @@ import { ArrowUp } from "lucide-astro";
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", () => {
-      updateMetrics();
-      onScroll();
+      metricsDirty = true;
     }, { passive: true });
 
-    updateMetrics();
-    onScroll();
+    // Non-blocking initial check after load/idle to avoid synchronous forced reflow during critical rendering
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(() => {
+        if ((window.scrollY || document.documentElement.scrollTop) > 50) onScroll();
+      });
+    } else {
+      setTimeout(() => {
+        if ((window.scrollY || document.documentElement.scrollTop) > 50) onScroll();
+      }, 300);
+    }
 
     btn?.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });

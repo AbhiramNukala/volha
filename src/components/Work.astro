@@ -51,7 +51,7 @@ import { ArrowUpRight, Copy, Check } from "lucide-astro";
               class="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-neutral-200 dark:border-neutral-800 bg-neutral-100/60 dark:bg-neutral-900/60 hover:border-neutral-400 dark:hover:border-neutral-600 text-xs font-mono text-neutral-800 dark:text-neutral-200 cursor-pointer transition-colors group/btn"
               title="Click to copy install command"
             >
-              <span class="text-orange-600 dark:text-orange-500 font-bold select-none">$</span>
+              <span class="text-orange-700 dark:text-orange-500 font-bold select-none">$</span>
               <span>{project.install}</span>
               <span class="copy-icon inline-flex items-center text-neutral-400 group-hover/btn:text-orange-500">
                 <Copy class="size-3 copy-default" />
@@ -64,7 +64,7 @@ import { ArrowUpRight, Copy, Check } from "lucide-astro";
         <!-- Stack & Links Row -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2.5 border-t border-neutral-100 dark:border-neutral-800/80 text-xs font-mono">
           <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-neutral-500">
-            <span class="text-[10px] uppercase tracking-wider text-neutral-400 font-semibold mr-1">Stack:</span>
+            <span class="text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-semibold mr-1">Stack:</span>
             {project.stack.map((item, i) => (
               <>
                 <span class="text-neutral-700 dark:text-neutral-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">

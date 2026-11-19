@@ -3,8 +3,10 @@ import "../styles/global.css";
 import AuroraBackground from "../components/AuroraBackground.astro";
 import { personal, links } from "../data";
 import fontInter from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
+import fontInter500 from "@fontsource/inter/files/inter-latin-500-normal.woff2?url";
 import fontInstrumentSerif from "@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url";
 import fontInstrumentSerifItalic from "@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url";
+import fontJetbrainsMono from "@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2?url";
 
 interface Props {
   title?: string;
@@ -236,6 +238,13 @@ const jsonLd = {
     />
     <link
       rel="preload"
+      href={fontInter500}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
       href={fontInstrumentSerif}
       as="font"
       type="font/woff2"
@@ -244,6 +253,13 @@ const jsonLd = {
     <link
       rel="preload"
       href={fontInstrumentSerifItalic}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href={fontJetbrainsMono}
       as="font"
       type="font/woff2"
       crossorigin="anonymous"
@@ -444,9 +460,9 @@ const jsonLd = {
                 navLinks.forEach((link) => {
                   const href = link.getAttribute("href");
                   if (href && (href === `#${id}` || href.endsWith(`/#${id}`) || href.endsWith(`#${id}`))) {
-                    link.classList.add("text-orange-600", "dark:text-orange-400", "font-medium");
+                    link.classList.add("text-orange-700", "dark:text-orange-400", "font-medium");
                   } else {
-                    link.classList.remove("text-orange-600", "dark:text-orange-400", "font-medium");
+                    link.classList.remove("text-orange-700", "dark:text-orange-400", "font-medium");
                   }
                 });
               }
