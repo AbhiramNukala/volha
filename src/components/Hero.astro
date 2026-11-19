@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import einsteinImg from "../assets/stickers/einstein.webp";
 import { personal } from "../data";
-import { ArrowDown, Copy, Check } from "lucide-astro";
+import { ArrowDown, ArrowRight, Copy, Check } from "lucide-astro";
 ---
 
 <section id="top" class="w-full pt-6 sm:pt-8 pb-6 sm:pb-8 font-sans">
@@ -13,11 +13,11 @@ import { ArrowDown, Copy, Check } from "lucide-astro";
       <div class="lg:col-span-7 xl:col-span-8 space-y-5">
         <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-normal text-neutral-950 dark:text-white leading-[1.05] tracking-tight">
           Building{" "}
-          <span class="italic text-orange-600 dark:text-orange-400">
+          <span class="italic text-orange-600 dark:text-orange-400 aurora-text-gradient">
             React.js
           </span>{" "}
           web apps &amp;{" "}
-          <span class="italic text-orange-600 dark:text-orange-400">
+          <span class="italic text-orange-600 dark:text-orange-400 aurora-text-gradient">
             React Native
           </span>{" "}
           mobile systems.
@@ -46,6 +46,14 @@ import { ArrowDown, Copy, Check } from "lucide-astro";
           </a>
 
           <a
+            href="/blog"
+            class="inline-flex items-center gap-1.5 font-medium text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 transition-colors group"
+          >
+            <span>Blog</span>
+            <ArrowRight class="size-4 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 transition-all" stroke-width={2.25} />
+          </a>
+
+          <a
             href="#contact"
             class="inline-flex items-center gap-1.5 font-medium text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 transition-colors group"
           >
@@ -71,7 +79,9 @@ import { ArrowDown, Copy, Check } from "lucide-astro";
       <!-- Right Column: Einstein Artwork Centered with Witty Note -->
       <div class="lg:col-span-5 xl:col-span-4 flex flex-col items-center justify-center pt-2 lg:pt-0">
         <div class="flex flex-col items-center justify-center text-center space-y-3 group select-none w-full">
-          <div class="flex justify-center items-center w-full">
+          <div class="relative flex justify-center items-center w-full">
+            <!-- Warm Aurora Halo Behind Artwork -->
+            <div class="absolute w-36 sm:w-44 h-36 sm:h-44 rounded-full bg-gradient-to-tr from-orange-500/20 via-amber-400/15 to-transparent blur-2xl pointer-events-none -z-10 animate-pulse" style="animation-duration: 6s;"></div>
             <Image
               src={einsteinImg}
               alt="Albert Einstein sticking his tongue out"

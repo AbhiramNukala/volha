@@ -1,0 +1,307 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import CommandPalette from "../../components/CommandPalette.astro";
+import ScrollToTop from "../../components/ScrollToTop.astro";
+import { getCollection, render } from "astro:content";
+import { Calendar, Clock, ArrowLeft, ArrowRight, Share2 } from "lucide-astro";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+
+  return posts.map((post, index) => {
+    // Next is newer (index - 1), Prev is older (index + 1)
+    const next = index > 0 ? posts[index - 1] : null;
+    const prev = index < posts.length - 1 ? posts[index + 1] : null;
+    return {
+      params: { slug: post.id },
+      props: { post, prev, next },
+    };
+  });
+}
+
+const { post, prev, next } = Astro.props;
+const { Content } = await render(post);
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+---
+
+<Layout>
+  <CommandPalette />
+  <Nav />
+
+  <main class="w-full flex-1 pt-3 sm:pt-4 pb-3 sm:pb-4 font-sans">
+    <div class="w-full max-w-4xl mx-auto px-6 sm:px-10 lg:px-16">
+      <!-- Breadcrumb / Back Link -->
+      <div class="mb-1.5 sm:mb-2 flex items-center justify-between">
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-500 hover:text-orange-600 dark:hover:text-orange-400 transition-colors group"
+        >
+          <ArrowLeft class="size-3.5 group-hover:-translate-x-1 transition-transform" />
+          <span>All Writings</span>
+        </a>
+
+        <button
+          type="button"
+          id="copy-article-link"
+          class="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-500 hover:text-orange-600 dark:hover:text-orange-400 transition-colors cursor-pointer group bg-transparent border-0 p-0"
+          title="Copy article link"
+        >
+          <Share2 class="size-3.5 text-neutral-400 group-hover:text-orange-500 transition-colors" />
+          <span id="share-btn-text">Share</span>
+        </button>
+      </div>
+
+      <!-- Article Header -->
+      <header class="space-y-2 sm:space-y-2.5 pb-5 border-b border-neutral-200 dark:border-neutral-800">
+        <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-normal text-neutral-950 dark:text-white leading-[1.08] tracking-tight">
+          {post.data.title}
+        </h1>
+
+        <p class="text-base sm:text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans max-w-3xl">
+          {post.data.description}
+        </p>
+
+        <!-- Meta Line -->
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 pt-2 font-mono text-xs text-neutral-500 border-t border-neutral-100 dark:border-neutral-800/80">
+          <span class="inline-flex items-center gap-1.5">
+            <Calendar class="size-3.5 text-neutral-400" />
+            <time datetime={post.data.pubDate.toISOString()}>
+              {formatDate(post.data.pubDate)}
+            </time>
+          </span>
+
+          {post.data.readingTime && (
+            <span class="inline-flex items-center gap-1.5">
+              <Clock class="size-3.5 text-neutral-400" />
+              <span>{post.data.readingTime}</span>
+            </span>
+          )}
+
+          <span>By {post.data.author}</span>
+        </div>
+      </header>
+
+      <!-- Markdown Article Body with Editorial Typography -->
+      <article class="article-content pt-4 pb-3 font-sans">
+        <Content />
+      </article>
+
+      <!-- Prev & Next Article Navigation Links -->
+      <nav class="pt-3 pb-1 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between gap-3 font-mono text-xs" aria-label="Article navigation">
+        {prev && (
+          <a
+            href={`/blog/${prev.id}`}
+            class="inline-flex items-center gap-1.5 text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors group"
+          >
+            <ArrowLeft class="size-3.5 group-hover:-translate-x-1 transition-transform shrink-0" />
+            <span class="text-neutral-400 dark:text-neutral-500">Previous:</span>
+            <span class="font-serif text-sm text-neutral-900 dark:text-neutral-100 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 line-clamp-1">
+              {prev.data.title}
+            </span>
+          </a>
+        )}
+
+        {next && (
+          <a
+            href={`/blog/${next.id}`}
+            class={`inline-flex items-center gap-1.5 text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors group text-right ${!prev ? "ml-auto" : ""}`}
+          >
+            <span class="text-neutral-400 dark:text-neutral-500">Next:</span>
+            <span class="font-serif text-sm text-neutral-900 dark:text-neutral-100 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 line-clamp-1">
+              {next.data.title}
+            </span>
+            <ArrowRight class="size-3.5 group-hover:translate-x-1 transition-transform shrink-0" />
+          </a>
+        )}
+      </nav>
+    </div>
+  </main>
+
+  <Footer />
+  <ScrollToTop />
+</Layout>
+
+<script is:inline>
+  document.getElementById("copy-article-link")?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      const btnText = document.getElementById("share-btn-text");
+      if (btnText) btnText.textContent = "Copied!";
+      if (window.showToast) window.showToast("Article URL copied to clipboard");
+      setTimeout(() => {
+        if (btnText) btnText.textContent = "Share";
+      }, 2000);
+    } catch {
+      if (window.showToast) window.showToast("Failed to copy URL");
+    }
+  });
+</script>
+
+<style is:global>
+  /* Editorial Markdown Body Styling */
+  .article-content {
+    color: #262626;
+    line-height: 1.75;
+    font-size: 1.05rem;
+  }
+
+  .article-content > *:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .dark .article-content {
+    color: #d4d4d8;
+  }
+
+  .article-content h2 {
+    font-family: var(--font-serif);
+    font-size: 1.85rem;
+    font-weight: 400;
+    margin-top: 2.25rem;
+    margin-bottom: 0.85rem;
+    color: #0a0a0a;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .dark .article-content h2 {
+    color: #ffffff;
+  }
+
+  .article-content h3 {
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    font-weight: 400;
+    margin-top: 1.75rem;
+    margin-bottom: 0.65rem;
+    color: #171717;
+    letter-spacing: -0.01em;
+  }
+
+  .dark .article-content h3 {
+    color: #fafafa;
+  }
+
+  .article-content p {
+    margin-bottom: 1.35rem;
+  }
+
+  .article-content strong {
+    font-weight: 600;
+    color: #0a0a0a;
+  }
+
+  .dark .article-content strong {
+    color: #ffffff;
+  }
+
+  .article-content hr {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 2.5rem 0;
+  }
+
+  .dark .article-content hr {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .article-content ul,
+  .article-content ol {
+    margin-bottom: 1.35rem;
+    padding-left: 1.5rem;
+  }
+
+  .article-content ul {
+    list-style-type: disc;
+  }
+
+  .article-content ol {
+    list-style-type: decimal;
+  }
+
+  .article-content li {
+    margin-bottom: 0.45rem;
+  }
+
+  .article-content blockquote {
+    border-left: 3px solid #ea580c;
+    padding-left: 1.25rem;
+    font-style: italic;
+    color: #52525b;
+    margin: 1.75rem 0;
+  }
+
+  .dark .article-content blockquote {
+    border-left-color: #f97316;
+    color: #a1a1aa;
+  }
+
+  .article-content pre {
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    background: #17171c !important;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .article-content code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+  }
+
+  .article-content :not(pre) > code {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.15rem 0.35rem;
+    border-radius: 0.25rem;
+    color: #ea580c;
+  }
+
+  .dark .article-content :not(pre) > code {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fb923c;
+  }
+
+  .article-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+    font-size: 0.875rem;
+  }
+
+  .article-content th,
+  .article-content td {
+    padding: 0.65rem 0.85rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+
+  .dark .article-content th,
+  .dark .article-content td {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .article-content th {
+    background: rgba(0, 0, 0, 0.03);
+    font-family: var(--font-mono);
+    font-weight: 600;
+  }
+
+  .dark .article-content th {
+    background: rgba(255, 255, 255, 0.04);
+  }
+</style>

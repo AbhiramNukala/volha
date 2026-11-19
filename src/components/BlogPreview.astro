@@ -1,0 +1,85 @@
+---
+import Section from "./Section.astro";
+import { getCollection } from "astro:content";
+import { ArrowRight, Calendar, Clock, ArrowUpRight } from "lucide-astro";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+---
+
+<Section
+  id="blog"
+  title="Brain Dumps & Notes"
+  subtitle="Occasional write-ups on things that broke, things that worked, and lessons learned the hard way."
+>
+  <div class="space-y-6 pt-2 font-sans">
+    {posts.length > 0 ? (
+      <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
+        {posts.map((post) => (
+          <article class="py-5 sm:py-6 first:pt-2 last:pb-2 group">
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 pb-1.5">
+              <!-- Title -->
+              <h3 class="font-serif text-2xl sm:text-3xl font-normal text-neutral-950 dark:text-white tracking-tight group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                <a href={`/blog/${post.id}`} class="inline-flex items-center gap-1.5">
+                  <span>{post.data.title}</span>
+                  <ArrowUpRight class="size-4 text-neutral-400 group-hover:text-orange-500 opacity-0 group-hover:opacity-100 transition-all shrink-0" />
+                </a>
+              </h3>
+
+              <!-- Date & Reading Time -->
+              <div class="flex items-center gap-3 font-mono text-xs text-neutral-500 shrink-0">
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {formatDate(post.data.pubDate)}
+                </time>
+                {post.data.readingTime && (
+                  <>
+                    <span class="text-neutral-300 dark:text-neutral-700">·</span>
+                    <span>{post.data.readingTime}</span>
+                  </>
+                )}
+              </div>
+            </div>
+
+            <!-- Description -->
+            <p class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-4xl pt-1">
+              {post.data.description}
+            </p>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="py-10 text-center space-y-2 font-sans border-t border-neutral-200/80 dark:border-neutral-800/80">
+        <p class="font-serif text-xl sm:text-2xl text-neutral-800 dark:text-neutral-200 font-normal">
+          No blogs in yet, hope they will be added soon!
+        </p>
+        <p class="text-xs sm:text-sm font-mono text-neutral-500">
+          Check back later for technical articles and architecture breakdowns.
+        </p>
+      </div>
+    )}
+
+    <!-- View All Writings Link -->
+    <div class="pt-4 border-t border-neutral-200/80 dark:border-neutral-800/80 flex items-center justify-between">
+      <p class="text-xs font-mono text-neutral-500">
+        Articles written on production engineering &amp; architecture.
+      </p>
+
+      <a
+        href="/blog"
+        class="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 hover:translate-x-1 transition-all"
+      >
+        <span>View All Articles</span>
+        <ArrowRight class="size-3.5" />
+      </a>
+    </div>
+  </div>
+</Section>

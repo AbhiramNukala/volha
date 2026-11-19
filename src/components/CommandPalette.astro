@@ -1,6 +1,9 @@
 ---
-import { Search, CornerDownLeft, Moon, Sun, Copy, ExternalLink, Mail, X } from "lucide-astro";
+import { Search, CornerDownLeft, Moon, Sun, Copy, ExternalLink, Mail, X, BookOpen } from "lucide-astro";
 import { personal } from "../data";
+
+const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
+const prefix = isHome ? "" : "/";
 ---
 
 <!-- Command Palette Modal Backdrop -->
@@ -43,7 +46,7 @@ import { personal } from "../data";
       </div>
 
       <a
-        href="#top"
+        href={`${prefix}#top`}
         class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
         data-keyword="top hero home summary about"
       >
@@ -52,7 +55,7 @@ import { personal } from "../data";
       </a>
 
       <a
-        href="#about"
+        href={`${prefix}#about`}
         class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
         data-keyword="skills technologies tools react native c++ typescript web mobile"
       >
@@ -61,7 +64,7 @@ import { personal } from "../data";
       </a>
 
       <a
-        href="#experience"
+        href={`${prefix}#experience`}
         class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
         data-keyword="experience work history mindwave makeroot estimate ai musidy medicalshare"
       >
@@ -70,7 +73,7 @@ import { personal } from "../data";
       </a>
 
       <a
-        href="#work"
+        href={`${prefix}#work`}
         class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
         data-keyword="projects open source rn-udpb cosmos c++ jsi nitro modules mastodon"
       >
@@ -79,7 +82,19 @@ import { personal } from "../data";
       </a>
 
       <a
-        href="#contact"
+        href="/blog"
+        class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
+        data-keyword="blog writings essays articles posts engineering c++ jsi react native rbac"
+      >
+        <div class="flex items-center gap-2">
+          <BookOpen class="size-3.5 text-orange-500" />
+          <span class="font-medium text-sm text-neutral-950 dark:text-white">Blog &amp; Technical Writings</span>
+        </div>
+        <CornerDownLeft class="size-3.5 text-neutral-400 opacity-0 group-hover:opacity-100" />
+      </a>
+
+      <a
+        href={`${prefix}#contact`}
         class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
         data-keyword="contact email get in touch reach"
       >

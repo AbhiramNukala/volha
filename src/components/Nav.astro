@@ -4,18 +4,22 @@ import tiger from "../assets/stickers/tiger.webp";
 import { personal } from "../data";
 import { ArrowRight, Sun, Moon, Command, Copy, Check } from "lucide-astro";
 
+const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
+const prefix = isHome ? "" : "/";
+
 const navLinks = [
-  { label: "Skills", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#work" },
-  { label: "Contact", href: "#contact" },
+  { label: "Skills", href: `${prefix}#about` },
+  { label: "Experience", href: `${prefix}#experience` },
+  { label: "Projects", href: `${prefix}#work` },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: `${prefix}#contact` },
 ];
 ---
 
-<header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/90 dark:bg-[#0c0d11]/90 border-b border-neutral-200/80 dark:border-neutral-800/80 transition-colors">
+<header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 dark:bg-[#0c0d11]/80 border-b border-neutral-200/80 dark:border-neutral-800/80 transition-colors">
   <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-3.5 flex items-center justify-between gap-4">
     <!-- Brand / Tiger Mascot -->
-    <a href="#top" class="flex items-center gap-2.5 group shrink-0">
+    <a href={isHome ? "#top" : "/"} class="flex items-center gap-2.5 group shrink-0">
       <div class="transform -rotate-6 group-hover:rotate-6 group-hover:scale-110 transition-transform duration-300">
         <Image
           src={tiger}

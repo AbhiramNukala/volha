@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import AuroraBackground from "../components/AuroraBackground.astro";
 import { personal, links } from "../data";
 import fontInter from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
 import fontJetBrainsMono from "@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2?url";
@@ -166,8 +167,17 @@ const jsonLd = {
       })();
     </script>
   </head>
-  <body class="bg-[#fafaf9] dark:bg-[#0c0d11] text-neutral-900 dark:text-neutral-100 antialiased min-h-screen flex flex-col font-sans selection:bg-orange-500/20 selection:text-orange-700 dark:selection:bg-orange-500/30 dark:selection:text-orange-300">
-    <slot />
+  <body class="bg-[#fafaf9] dark:bg-[#0c0d11] text-neutral-900 dark:text-neutral-100 antialiased min-h-screen flex flex-col font-sans selection:bg-orange-500/20 selection:text-orange-700 dark:selection:bg-orange-500/30 dark:selection:text-orange-300 relative">
+    <!-- Animated Orange Aurora Atmosphere -->
+    <AuroraBackground />
+
+    <!-- Tactile Background Film Grain -->
+    <div class="fixed inset-0 pointer-events-none select-none z-[1] bg-noise" aria-hidden="true"></div>
+
+    <!-- Site Content Layer -->
+    <div class="relative z-10 flex flex-col min-h-screen">
+      <slot />
+    </div>
 
     <!-- Minimalist Toast notification -->
     <div
