@@ -22,8 +22,6 @@
   <div class="aurora-blob aurora-blob-4"></div>
   <div class="aurora-blob aurora-blob-5"></div>
 
-  <!-- Velvety Film Grain Noise to prevent gradient banding -->
-  <div class="aurora-noise absolute inset-0 pointer-events-none"></div>
 
   <!-- Top Horizon Electric Accent Line -->
   <div class="aurora-horizon-beam absolute top-0 inset-x-0 h-[1.5px]"></div>
@@ -66,15 +64,21 @@
     --aur-beam: linear-gradient(90deg, transparent 0%, rgba(249, 115, 22, 0.5) 25%, rgba(251, 191, 36, 0.9) 50%, rgba(249, 115, 22, 0.5) 75%, transparent 100%);
   }
 
+  .aurora-wrapper {
+    contain: strict;
+  }
+
   .aurora-ambient {
     background: var(--aur-ambient);
     filter: blur(40px);
     opacity: 0.9;
   }
 
-  /* Waving Aurora Curtains */
+  /* Waving Aurora Curtains - 100% GPU accelerated */
   .aurora-curtain {
-    will-change: transform, background-position;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
     mask-image: radial-gradient(ellipse 92% 75% at 50% 18%, black 28%, transparent 88%);
     -webkit-mask-image: radial-gradient(ellipse 92% 75% at 50% 18%, black 28%, transparent 88%);
   }
@@ -126,7 +130,10 @@
     border-radius: 50%;
     mix-blend-mode: normal;
     will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
     pointer-events: none;
+    contain: layout paint;
   }
 
   :global(.dark) .aurora-blob {
@@ -183,19 +190,6 @@
     animation: aurora-drift-5 34s ease-in-out infinite alternate;
   }
 
-  /* Subtle noise texture */
-  .aurora-noise {
-    background-image: url("/noise.svg");
-    background-repeat: repeat;
-    background-size: 180px 180px;
-    opacity: 0.04;
-    mix-blend-mode: multiply;
-  }
-
-  :global(.dark) .aurora-noise {
-    opacity: 0.065;
-    mix-blend-mode: overlay;
-  }
 
   /* Top horizon beam */
   .aurora-horizon-beam {
@@ -203,34 +197,28 @@
     animation: aurora-beam-pulse 10s ease-in-out infinite alternate;
   }
 
-  /* Keyframe Animations */
+  /* Keyframe Animations - Pure GPU Composited (Zero Repaint) */
   @keyframes aurora-curtain-1 {
     0% {
-      background-position: 0% 0%;
-      transform: translateY(0) scaleY(1) skewX(0deg);
+      transform: translate3d(0, 0, 0) scaleY(1) skewX(0deg);
     }
     50% {
-      background-position: 60% 40%;
-      transform: translateY(18px) scaleY(1.1) skewX(2.5deg);
+      transform: translate3d(3%, 18px, 0) scaleY(1.08) skewX(2.5deg);
     }
     100% {
-      background-position: 120% 70%;
-      transform: translateY(-12px) scaleY(0.96) skewX(-2deg);
+      transform: translate3d(-3%, -12px, 0) scaleY(0.96) skewX(-2deg);
     }
   }
 
   @keyframes aurora-curtain-2 {
     0% {
-      background-position: 100% 50%;
-      transform: translateY(0) scaleY(1) skewX(0deg);
+      transform: translate3d(0, 0, 0) scaleY(1) skewX(0deg);
     }
     50% {
-      background-position: 40% 10%;
-      transform: translateY(-15px) scaleY(1.08) skewX(-2.5deg);
+      transform: translate3d(-3%, -15px, 0) scaleY(1.08) skewX(-2.5deg);
     }
     100% {
-      background-position: 0% 80%;
-      transform: translateY(14px) scaleY(0.95) skewX(2deg);
+      transform: translate3d(3%, 14px, 0) scaleY(0.95) skewX(2deg);
     }
   }
 

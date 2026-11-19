@@ -12,6 +12,7 @@ const prefix = isHome ? "" : "/";
   class="fixed inset-0 z-[100] bg-neutral-950/70 backdrop-blur-xs hidden items-start justify-center pt-[12vh] px-4"
   aria-modal="true"
   role="dialog"
+  aria-label="Command Palette"
 >
   <!-- Modal Dialog -->
   <div
@@ -24,6 +25,7 @@ const prefix = isHome ? "" : "/";
       <input
         id="command-palette-input"
         type="text"
+        aria-label="Search sections or actions"
         placeholder="Type to search sections or actions..."
         class="w-full bg-transparent text-sm text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none"
         autocomplete="off"
@@ -33,7 +35,7 @@ const prefix = isHome ? "" : "/";
         type="button"
         id="command-palette-close"
         class="size-6 flex items-center justify-center rounded text-neutral-400 hover:text-neutral-900 dark:hover:text-white cursor-pointer"
-        aria-label="Close"
+        aria-label="Close command palette"
       >
         <X class="size-4" />
       </button>
@@ -136,7 +138,8 @@ const prefix = isHome ? "" : "/";
       <a
         href={personal.github}
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
+        aria-label="Open GitHub Profile (opens in a new tab)"
         class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
         data-keyword="github profile code"
       >
@@ -150,7 +153,8 @@ const prefix = isHome ? "" : "/";
       <a
         href={personal.linkedin}
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
+        aria-label="Open LinkedIn Profile (opens in a new tab)"
         class="command-item flex items-center justify-between px-3 py-2.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-950 dark:hover:text-white transition-colors group cursor-pointer"
         data-keyword="linkedin profile connect"
       >

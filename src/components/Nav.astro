@@ -40,15 +40,22 @@ const navLinks = [
     </a>
 
     <!-- Desktop Nav Links -->
-    <nav class="hidden md:flex items-center gap-1 text-xs font-sans text-neutral-600 dark:text-neutral-400">
-      {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class="nav-anchor px-3 py-1.5 rounded-md hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors"
-        >
-          {link.label}
-        </a>
-      ))}
+    <nav class="hidden md:flex items-center gap-1 text-xs font-sans text-neutral-600 dark:text-neutral-400" aria-label="Main navigation">
+      {navLinks.map((link) => {
+        const isActive = link.href === "/blog" && Astro.url.pathname.startsWith("/blog");
+        return (
+          <a
+            href={link.href}
+            class={`nav-anchor px-3 py-1.5 rounded-md transition-colors ${
+              isActive
+                ? "text-orange-600 dark:text-orange-400 font-medium bg-neutral-100/70 dark:bg-neutral-900/70"
+                : "hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900"
+            }`}
+          >
+            {link.label}
+          </a>
+        );
+      })}
     </nav>
 
     <!-- Desktop Controls -->
@@ -57,7 +64,7 @@ const navLinks = [
       <button
         type="button"
         data-command-trigger
-        onclick="window.openCommandPalette && window.openCommandPalette()"
+        aria-label="Open Command Palette (Cmd + K)"
         class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white hover:border-neutral-400 dark:hover:border-neutral-600 text-xs font-mono cursor-pointer transition-colors"
         title="Open Command Palette (Cmd + K)"
       >
@@ -69,6 +76,7 @@ const navLinks = [
       <button
         type="button"
         data-copy={personal.email}
+        aria-label="Copy Email Address"
         class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white text-xs font-sans cursor-pointer transition-colors group"
         title="Copy Email Address"
       >
@@ -95,8 +103,7 @@ const navLinks = [
       <button
         type="button"
         data-command-trigger
-        onclick="window.openCommandPalette && window.openCommandPalette()"
-        aria-label="Open menu"
+        aria-label="Open command palette"
         class="size-8 flex items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer"
       >
         <Command class="size-3.5" />
@@ -116,6 +123,8 @@ const navLinks = [
         id="mobile-nav-toggle"
         type="button"
         aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="mobile-nav-menu"
         class="size-8 flex items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer"
       >
         <svg id="menu-icon-open" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

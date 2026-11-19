@@ -19,7 +19,7 @@ export const exp = calculateExperience();
 export const personal = {
   name: "Nukala Abhiram",
   title: "Software Engineer — React.js & React Native",
-  location: "Hyderabad, India",
+  location: "Hyd, IN",
   email: "abhiram.reddy122002@gmail.com",
   github: "https://github.com/AbhiramNukala",
   linkedin: "https://www.linkedin.com/in/nukala-abhiram-0a1828255",

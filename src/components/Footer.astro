@@ -1,79 +1,100 @@
 ---
 import { Image } from "astro:assets";
 import tiger from "../assets/stickers/tiger.webp";
-import { Command, ArrowUpRight } from "lucide-astro";
+import { Github, Linkedin, Package } from "lucide-astro";
 import { personal } from "../data";
 ---
 
-<footer class="w-full border-t border-neutral-200/80 dark:border-neutral-800/80 font-sans text-xs text-neutral-500 bg-transparent">
-  <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-4">
-    <!-- Brand, Name & Single Official Location / Timezone Display -->
-    <div class="flex items-center gap-3">
-      <div class="transform -rotate-6 hover:rotate-6 transition-transform select-none">
+<footer class="w-full border-t border-neutral-200/80 dark:border-neutral-800/80 font-sans text-xs text-neutral-500 bg-transparent py-2.5 sm:py-3">
+  <div class="w-full max-w-7xl mx-auto px-4 sm:px-10 lg:px-16 flex items-center justify-between gap-2">
+    <!-- Left: Cute Tiger Sticker + Name in a single line -->
+    <div class="flex items-center gap-1.5 sm:gap-2 min-w-0 select-none shrink">
+      <div class="transform -rotate-6 hover:rotate-12 hover:scale-110 active:scale-95 transition-transform duration-300 cursor-pointer shrink-0">
         <Image
           src={tiger}
           alt="Tiger mascot"
-          width={32}
-          height={32}
+          width={24}
+          height={24}
           quality={90}
           loading="lazy"
           decoding="async"
-          class="w-6.5 h-auto aspect-square object-contain filter drop-shadow-xs"
+          class="w-5 h-auto aspect-square object-contain filter drop-shadow-xs"
         />
       </div>
-      <div>
-        <p class="font-medium text-neutral-900 dark:text-neutral-100">
-          {personal.name}
-        </p>
-        <p class="text-[11px] font-mono text-neutral-500">
-          {personal.location} · IST (UTC+05:30)
-        </p>
-      </div>
+      <span class="font-serif text-xs sm:text-sm text-neutral-950 dark:text-white font-normal tracking-tight truncate">
+        {personal.name}
+      </span>
+      <span class="text-neutral-300 dark:text-neutral-700 select-none shrink-0">·</span>
+      <span class="text-[10px] sm:text-[11px] font-mono text-neutral-400 shrink-0">
+        Hyd, IN
+      </span>
     </div>
 
-    <!-- Social Links moved cleanly to Footer -->
-    <div class="flex flex-wrap items-center gap-5 font-mono text-xs">
-      <a
-        href={personal.github}
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center gap-1 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors group"
-      >
-        <span>GitHub</span>
-        <ArrowUpRight class="size-3 text-neutral-400 group-hover:text-orange-500" />
-      </a>
+    <!-- Right: Icons on mobile (< md), text links on mid & large (md+) -->
+    <div class="flex items-center shrink-0">
+      <!-- Mobile (< md): Cute Compact Icons -->
+      <div class="flex md:hidden items-center gap-1 font-mono">
+        <a
+          href={personal.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub Profile"
+          class="p-1.5 rounded-md text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+        >
+          <Github class="size-3.5" />
+        </a>
+        <a
+          href={personal.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn Profile"
+          class="p-1.5 rounded-md text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+        >
+          <Linkedin class="size-3.5" />
+        </a>
+        <a
+          href={personal.npm}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="npm Packages"
+          class="p-1.5 rounded-md text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+        >
+          <Package class="size-3.5" />
+        </a>
+      </div>
 
-      <a
-        href={personal.linkedin}
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center gap-1 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors group"
-      >
-        <span>LinkedIn</span>
-        <ArrowUpRight class="size-3 text-neutral-400 group-hover:text-orange-500" />
-      </a>
-
-      <a
-        href={personal.npm}
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center gap-1 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors group"
-      >
-        <span>npm</span>
-        <ArrowUpRight class="size-3 text-neutral-400 group-hover:text-orange-500" />
-      </a>
-
-      <span class="text-neutral-300 dark:text-neutral-700 select-none hidden sm:inline">·</span>
-
-      <button
-        type="button"
-        data-command-trigger
-        onclick="window.openCommandPalette && window.openCommandPalette()"
-        class="inline-flex items-center gap-1.5 text-[11px] font-mono text-neutral-500 hover:text-orange-600 dark:hover:text-orange-400 transition-colors cursor-pointer"
-      >
-        <Command class="size-3" />
-        <span>Menu (⌘K)</span>
-      </button>
+      <!-- Mid & Large (md+): Text Links -->
+      <div class="hidden md:flex items-center gap-3.5 font-mono text-xs">
+        <a
+          href={personal.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub Profile"
+          class="text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors"
+        >
+          GitHub
+        </a>
+        <span class="text-neutral-300 dark:text-neutral-700 select-none">·</span>
+        <a
+          href={personal.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn Profile"
+          class="text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors"
+        >
+          LinkedIn
+        </a>
+        <span class="text-neutral-300 dark:text-neutral-700 select-none">·</span>
+        <a
+          href={personal.npm}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="npm Packages"
+          class="text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors"
+        >
+          npm
+        </a>
+      </div>
     </div>
   </div>
 </footer>

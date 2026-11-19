@@ -42,30 +42,46 @@ import { ArrowUp } from "lucide-astro";
     const btn = document.getElementById("scroll-to-top");
     const circle = document.getElementById("scroll-progress-circle");
     const circumference = 2 * Math.PI * 16; // 100.53
+    let ticking = false;
+    let scrollHeight = 0;
+
+    function updateMetrics() {
+      scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    }
 
     function onScroll() {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
 
-      if (circle) {
-        const offset = circumference - Math.min(Math.max(progress, 0), 1) * circumference;
-        circle.style.strokeDashoffset = `${offset}`;
-      }
+          if (circle) {
+            const offset = circumference - Math.min(Math.max(progress, 0), 1) * circumference;
+            circle.style.strokeDashoffset = `${offset}`;
+          }
 
-      if (btn) {
-        if (scrollTop > 180) {
-          btn.classList.remove("opacity-0", "pointer-events-none", "translate-y-3");
-          btn.classList.add("opacity-100", "pointer-events-auto", "translate-y-0");
-        } else {
-          btn.classList.add("opacity-0", "pointer-events-none", "translate-y-3");
-          btn.classList.remove("opacity-100", "pointer-events-auto", "translate-y-0");
-        }
+          if (btn) {
+            if (scrollTop > 180) {
+              btn.classList.remove("opacity-0", "pointer-events-none", "translate-y-3");
+              btn.classList.add("opacity-100", "pointer-events-auto", "translate-y-0");
+            } else {
+              btn.classList.add("opacity-0", "pointer-events-none", "translate-y-3");
+              btn.classList.remove("opacity-100", "pointer-events-auto", "translate-y-0");
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     }
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
+    window.addEventListener("resize", () => {
+      updateMetrics();
+      onScroll();
+    }, { passive: true });
+
+    updateMetrics();
     onScroll();
 
     btn?.addEventListener("click", () => {

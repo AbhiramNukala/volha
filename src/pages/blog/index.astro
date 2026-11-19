@@ -20,7 +20,10 @@ function formatDate(d: Date) {
 }
 ---
 
-<Layout>
+<Layout
+  title="Blog & Technical Writings"
+  description="Articles, architectural notes, and engineering breakdowns on React Native, C++ JSI, TypeScript, and modern web systems by Nukala Abhiram."
+>
   <CommandPalette />
   <Nav />
 
@@ -38,17 +41,13 @@ function formatDate(d: Date) {
       </div>
 
       <!-- Page Header -->
-      <div class="space-y-2 sm:space-y-2.5 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+      <div class="pb-6 border-b border-neutral-200 dark:border-neutral-800">
         <h1 class="font-serif text-4xl sm:text-6xl font-normal text-neutral-950 dark:text-white leading-[1.08] tracking-tight">
-          Brain Dumps, Bugs &amp;{" "}
+          Engineering &amp;{" "}
           <span class="italic text-orange-600 dark:text-orange-400 aurora-text-gradient">
-            Accidental Features
+            Technical Writings
           </span>
         </h1>
-
-        <p class="text-base sm:text-lg text-neutral-700 dark:text-neutral-300 max-w-2xl leading-relaxed">
-          A collection of 2 AM epiphanies, C++ memory leaks, questionable architectural choices, and things that somehow worked on my machine before being unleashed into production.
-        </p>
       </div>
 
       <!-- Articles Stream or Empty State -->
@@ -109,10 +108,10 @@ function formatDate(d: Date) {
       ) : (
         <div class="py-16 sm:py-24 text-center space-y-3 font-sans">
           <p class="font-serif text-2xl sm:text-3xl text-neutral-900 dark:text-neutral-100 font-normal">
-            No blogs in yet, hope they will be added soon!
+            No articles published yet.
           </p>
           <p class="text-xs sm:text-sm font-mono text-neutral-500">
-            Check back later for upcoming technical articles and engineering notes.
+            Check back soon for upcoming technical articles and engineering deep dives.
           </p>
         </div>
       )}

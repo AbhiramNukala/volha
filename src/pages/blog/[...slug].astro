@@ -35,7 +35,14 @@ function formatDate(d: Date) {
 }
 ---
 
-<Layout>
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  type="article"
+  publishedTime={post.data.pubDate.toISOString()}
+  modifiedTime={(post.data.updatedDate || post.data.pubDate).toISOString()}
+  tags={post.data.tags}
+>
   <CommandPalette />
   <Nav />
 

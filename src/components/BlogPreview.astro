@@ -18,8 +18,8 @@ function formatDate(d: Date) {
 
 <Section
   id="blog"
-  title="Brain Dumps & Notes"
-  subtitle="Occasional write-ups on things that broke, things that worked, and lessons learned the hard way."
+  title="Technical Writings & Notes"
+  subtitle="Articles, architectural breakdowns, and engineering notes."
 >
   <div class="space-y-6 pt-2 font-sans">
     {posts.length > 0 ? (
@@ -59,20 +59,16 @@ function formatDate(d: Date) {
     ) : (
       <div class="py-10 text-center space-y-2 font-sans border-t border-neutral-200/80 dark:border-neutral-800/80">
         <p class="font-serif text-xl sm:text-2xl text-neutral-800 dark:text-neutral-200 font-normal">
-          No blogs in yet, hope they will be added soon!
+          No articles published yet.
         </p>
         <p class="text-xs sm:text-sm font-mono text-neutral-500">
-          Check back later for technical articles and architecture breakdowns.
+          Check back soon for upcoming technical articles and engineering deep dives.
         </p>
       </div>
     )}
 
     <!-- View All Writings Link -->
-    <div class="pt-4 border-t border-neutral-200/80 dark:border-neutral-800/80 flex items-center justify-between">
-      <p class="text-xs font-mono text-neutral-500">
-        Articles written on production engineering &amp; architecture.
-      </p>
-
+    <div class="pt-4 border-t border-neutral-200/80 dark:border-neutral-800/80 flex items-center justify-end">
       <a
         href="/blog"
         class="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 hover:translate-x-1 transition-all"
