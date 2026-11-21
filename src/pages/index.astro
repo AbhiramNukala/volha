@@ -10,9 +10,19 @@ import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
 import CommandPalette from "../components/CommandPalette.astro";
 import ScrollToTop from "../components/ScrollToTop.astro";
+import { getImage } from "astro:assets";
+import einsteinImg from "../assets/stickers/einstein.webp";
+
+const optimizedEinstein = await getImage({
+  src: einsteinImg,
+  width: 200,
+  height: 210,
+  quality: 75,
+  format: "webp",
+});
 ---
 
-<Layout>
+<Layout preloadImage={optimizedEinstein.src}>
   <CommandPalette />
   <Nav />
   <main class="w-full flex-1">

@@ -28,12 +28,12 @@ function formatDate(d: Date) {
   <Nav />
 
   <main class="w-full flex-1 pt-3 sm:pt-4 pb-16 font-sans">
-    <div class="w-full max-w-5xl mx-auto px-6 sm:px-10 lg:px-16">
+    <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
       <!-- Back Link -->
       <div class="mb-1.5 sm:mb-2">
         <a
           href="/"
-          class="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-500 hover:text-orange-600 dark:hover:text-orange-400 transition-colors group"
+          class="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-500 hover:text-orange-700 dark:hover:text-orange-400 transition-colors group"
         >
           <ArrowLeft class="size-3.5 group-hover:-translate-x-1 transition-transform" />
           <span>Back to Portfolio</span>
@@ -44,7 +44,7 @@ function formatDate(d: Date) {
       <div class="pb-6 border-b border-neutral-200 dark:border-neutral-800">
         <h1 class="font-serif text-4xl sm:text-6xl font-normal text-neutral-950 dark:text-white leading-[1.08] tracking-tight">
           Engineering &amp;{" "}
-          <span class="italic text-orange-600 dark:text-orange-400 aurora-text-gradient">
+          <span class="italic text-orange-700 dark:text-orange-400 aurora-text-gradient">
             Technical Writings
           </span>
         </h1>
@@ -80,14 +80,14 @@ function formatDate(d: Date) {
                 </div>
 
                 <!-- Title Link -->
-                <h2 class="font-serif text-2xl sm:text-3xl font-normal text-neutral-950 dark:text-white tracking-tight leading-snug group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                <h2 class="font-serif text-2xl sm:text-3xl font-normal text-neutral-950 dark:text-white tracking-tight leading-snug group-hover:text-orange-700 dark:group-hover:text-orange-400 transition-colors">
                   <a href={`/blog/${post.id}`} class="block">
                     {post.data.title}
                   </a>
                 </h2>
 
                 <!-- Description -->
-                <p class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans max-w-3xl">
+                <p class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans max-w-4xl">
                   {post.data.description}
                 </p>
 
@@ -95,7 +95,7 @@ function formatDate(d: Date) {
                 <div class="pt-1">
                   <a
                     href={`/blog/${post.id}`}
-                    class="inline-flex items-center gap-1 text-xs font-mono font-medium text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 group-hover:translate-x-1 transition-all"
+                    class="inline-flex items-center gap-1 text-xs font-mono font-medium text-orange-700 hover:text-orange-800 dark:text-orange-400 dark:hover:text-orange-300 group-hover:translate-x-1 transition-all"
                   >
                     <span>Read Article</span>
                     <ArrowRight class="size-3.5" />

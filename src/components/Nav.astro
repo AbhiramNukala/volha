@@ -33,7 +33,7 @@ const navLinks = [
         />
       </div>
       <div>
-        <span class="font-serif text-lg text-neutral-950 dark:text-white font-normal group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors tracking-tight">
+        <span class="font-serif text-lg text-neutral-950 dark:text-white font-normal group-hover:text-orange-700 dark:group-hover:text-orange-400 transition-colors tracking-tight">
           {personal.name}
         </span>
       </div>
@@ -70,7 +70,7 @@ const navLinks = [
       >
         <Command class="size-3 text-neutral-400" />
         <span>Menu</span>
-        <kbd class="text-[9px] px-1 py-0.2 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-500">⌘K</kbd>
+        <kbd class="text-[9px] px-1 py-0.2 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400">⌘K</kbd>
       </button>
 
       <button
@@ -104,19 +104,19 @@ const navLinks = [
         type="button"
         data-command-trigger
         aria-label="Open command palette"
-        class="size-8 flex items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer"
+        class="size-9 flex items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer"
       >
-        <Command class="size-3.5" />
+        <Command class="size-4" />
       </button>
 
       <button
         id="theme-toggle-mobile"
         type="button"
         aria-label="Toggle theme"
-        class="size-8 flex items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 cursor-pointer"
+        class="size-9 flex items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 cursor-pointer"
       >
-        <Sun class="size-3.5 hidden dark:block" />
-        <Moon class="size-3.5 block dark:hidden" />
+        <Sun class="size-4 hidden dark:block" />
+        <Moon class="size-4 block dark:hidden" />
       </button>
 
       <button
@@ -125,12 +125,12 @@ const navLinks = [
         aria-label="Toggle navigation"
         aria-expanded="false"
         aria-controls="mobile-nav-menu"
-        class="size-8 flex items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer"
+        class="size-9 flex items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer"
       >
-        <svg id="menu-icon-open" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg id="menu-icon-open" class="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
-        <svg id="menu-icon-close" class="size-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg id="menu-icon-close" class="size-4.5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
@@ -145,10 +145,10 @@ const navLinks = [
     {navLinks.map((link) => (
       <a
         href={link.href}
-        class="mobile-nav-link flex items-center justify-between py-2 px-2.5 rounded hover:bg-neutral-100 dark:hover:bg-neutral-900 text-neutral-700 dark:text-neutral-300 transition-colors"
+        class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded hover:bg-neutral-100 dark:hover:bg-neutral-900 text-neutral-700 dark:text-neutral-300 transition-colors"
       >
         <span>{link.label}</span>
-        <ArrowRight class="size-3 text-neutral-400" />
+        <ArrowRight class="size-3 text-neutral-500 dark:text-neutral-400" />
       </a>
     ))}
 
@@ -156,7 +156,7 @@ const navLinks = [
       <button
         type="button"
         data-copy={personal.email}
-        class="flex-1 py-2 text-center rounded border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 text-xs"
+        class="flex-1 py-2.5 text-center rounded border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 text-xs"
       >
         Copy Email
       </button>

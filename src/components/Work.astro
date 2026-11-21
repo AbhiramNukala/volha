@@ -67,7 +67,7 @@ import { ArrowUpRight, Copy, Check } from "lucide-astro";
             <span class="text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-semibold mr-1">Stack:</span>
             {project.stack.map((item, i) => (
               <>
-                <span class="text-neutral-700 dark:text-neutral-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                <span class="text-neutral-700 dark:text-neutral-300 hover:text-orange-700 dark:hover:text-orange-400 transition-colors">
                   {item}
                 </span>
                 {i < project.stack.length - 1 && (
@@ -84,7 +84,7 @@ import { ArrowUpRight, Copy, Check } from "lucide-astro";
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${project.title} on ${link.label} (opens in a new tab)`}
-                class="inline-flex items-center gap-1 text-neutral-900 hover:text-orange-600 dark:text-neutral-200 dark:hover:text-orange-400 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 transition-colors"
+                class="inline-flex items-center gap-1 text-neutral-900 hover:text-orange-700 dark:text-neutral-200 dark:hover:text-orange-400 underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700 transition-colors"
               >
                 <span>{link.label}</span>
                 <ArrowUpRight class="size-3 text-neutral-400" />

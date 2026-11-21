@@ -11,8 +11,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-accent: #ea580c;
-  --color-accent-hover: #c2410c;
+  --color-accent: #c2410c;
+  --color-accent-hover: #9a3412;
 
   --font-serif: "Instrument Serif", Georgia, Cambria, "Times New Roman", serif;
   --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -27,7 +27,7 @@
     --color-faint: #71717a;
     --color-line: rgba(0, 0, 0, 0.09);
     --color-line-hover: rgba(0, 0, 0, 0.2);
-    --color-accent: #ea580c;
+    --color-accent: #c2410c;
   }
 
   .dark {
@@ -169,17 +169,15 @@
 
 /* Tactile background film grain noise */
 .bg-noise {
-  background-image: url("/noise.svg");
+  background-image: url("/noise.webp");
   background-repeat: repeat;
-  background-size: 180px 180px;
-  opacity: 0.045;
-  mix-blend-mode: multiply;
+  background-size: 80px 80px;
+  opacity: 0.035;
   pointer-events: none;
 }
 
 .dark .bg-noise {
-  opacity: 0.075;
-  mix-blend-mode: overlay;
+  opacity: 0.055;
 }
 
 /* Minimalist toast notification */

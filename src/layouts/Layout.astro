@@ -18,6 +18,7 @@ interface Props {
   modifiedTime?: string;
   tags?: string[];
   noindex?: boolean;
+  preloadImage?: string;
 }
 
 const {
@@ -30,6 +31,7 @@ const {
   modifiedTime,
   tags = [],
   noindex = false,
+  preloadImage,
 } = Astro.props;
 
 const siteUrl = Astro.site?.href ? Astro.site.href.replace(/\/$/, "") : "https://abhiramnukala.netlify.app";
@@ -212,7 +214,7 @@ const jsonLd = {
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+      content="width=device-width, initial-scale=1.0"
     />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -228,21 +230,7 @@ const jsonLd = {
     <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
-    <!-- Preload Critical Above-The-Fold Fonts -->
-    <link
-      rel="preload"
-      href={fontInter}
-      as="font"
-      type="font/woff2"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="preload"
-      href={fontInter500}
-      as="font"
-      type="font/woff2"
-      crossorigin="anonymous"
-    />
+    <!-- Preload Critical Above-The-Fold Assets (Primary Headline & Body Fonts) -->
     <link
       rel="preload"
       href={fontInstrumentSerif}
@@ -252,18 +240,20 @@ const jsonLd = {
     />
     <link
       rel="preload"
-      href={fontInstrumentSerifItalic}
+      href={fontInter}
       as="font"
       type="font/woff2"
       crossorigin="anonymous"
     />
-    <link
-      rel="preload"
-      href={fontJetbrainsMono}
-      as="font"
-      type="font/woff2"
-      crossorigin="anonymous"
-    />
+    {preloadImage && (
+      <link
+        rel="preload"
+        as="image"
+        href={preloadImage}
+        type="image/webp"
+        fetchpriority="high"
+      />
+    )}
 
     <!-- Open Graph / Meta -->
     <meta property="og:type" content={type} />

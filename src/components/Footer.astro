@@ -6,7 +6,7 @@ import { personal } from "../data";
 ---
 
 <footer class="w-full border-t border-neutral-200/80 dark:border-neutral-800/80 font-sans text-xs text-neutral-500 bg-transparent py-2.5 sm:py-3">
-  <div class="w-full max-w-7xl mx-auto px-4 sm:px-10 lg:px-16 flex items-center justify-between gap-2">
+  <div class="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between gap-2">
     <!-- Left: Cute Tiger Sticker + Name in a single line -->
     <div class="flex items-center gap-1.5 sm:gap-2 min-w-0 select-none shrink">
       <div class="transform -rotate-6 hover:rotate-12 hover:scale-110 active:scale-95 transition-transform duration-300 cursor-pointer shrink-0">
@@ -32,34 +32,34 @@ import { personal } from "../data";
 
     <!-- Right: Icons on mobile (< md), text links on mid & large (md+) -->
     <div class="flex items-center shrink-0">
-      <!-- Mobile (< md): Cute Compact Icons -->
-      <div class="flex md:hidden items-center gap-1 font-mono">
+      <!-- Mobile (< md): Cute Compact Icons with comfortable tap targets -->
+      <div class="flex md:hidden items-center gap-1.5 font-mono">
         <a
           href={personal.github}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub Profile"
-          class="p-1.5 rounded-md text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+          class="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-md text-neutral-600 hover:text-orange-700 dark:text-neutral-400 dark:hover:text-orange-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
         >
-          <Github class="size-3.5" />
+          <Github class="size-4" />
         </a>
         <a
           href={personal.linkedin}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn Profile"
-          class="p-1.5 rounded-md text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+          class="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-md text-neutral-600 hover:text-orange-700 dark:text-neutral-400 dark:hover:text-orange-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
         >
-          <Linkedin class="size-3.5" />
+          <Linkedin class="size-4" />
         </a>
         <a
           href={personal.npm}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="npm Packages"
-          class="p-1.5 rounded-md text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+          class="p-2 min-w-[36px] min-h-[36px] flex items-center justify-center rounded-md text-neutral-600 hover:text-orange-700 dark:text-neutral-400 dark:hover:text-orange-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
         >
-          <Package class="size-3.5" />
+          <Package class="size-4" />
         </a>
       </div>
 
@@ -70,7 +70,7 @@ import { personal } from "../data";
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub Profile"
-          class="text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors"
+          class="text-neutral-600 hover:text-orange-700 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors"
         >
           GitHub
         </a>
@@ -80,7 +80,7 @@ import { personal } from "../data";
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn Profile"
-          class="text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors"
+          class="text-neutral-600 hover:text-orange-700 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors"
         >
           LinkedIn
         </a>
@@ -90,7 +90,7 @@ import { personal } from "../data";
           target="_blank"
           rel="noopener noreferrer"
           aria-label="npm Packages"
-          class="text-neutral-600 hover:text-orange-600 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors"
+          class="text-neutral-600 hover:text-orange-700 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors"
         >
           npm
         </a>

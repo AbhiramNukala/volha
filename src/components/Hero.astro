@@ -13,11 +13,11 @@ import { ArrowDown, ArrowRight, Copy, Check } from "lucide-astro";
       <div class="lg:col-span-7 xl:col-span-8 space-y-5">
         <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-normal text-neutral-950 dark:text-white leading-[1.05] tracking-tight">
           Building{" "}
-          <span class="italic text-orange-600 dark:text-orange-400 aurora-text-gradient">
+          <span class="italic text-orange-700 dark:text-orange-400 aurora-text-gradient">
             React.js
           </span>{" "}
           web apps &amp;{" "}
-          <span class="italic text-orange-600 dark:text-orange-400 aurora-text-gradient">
+          <span class="italic text-orange-700 dark:text-orange-400 aurora-text-gradient">
             React Native
           </span>{" "}
           mobile systems.
@@ -31,40 +31,40 @@ import { ArrowDown, ArrowRight, Copy, Check } from "lucide-astro";
         <div class="pt-4 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-xs sm:text-sm font-sans border-t border-neutral-200/80 dark:border-neutral-800/80">
           <a
             href="#experience"
-            class="inline-flex items-center gap-1.5 font-medium text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 transition-colors group"
+            class="inline-flex items-center gap-1.5 py-1 font-medium text-neutral-950 hover:text-orange-700 dark:text-white dark:hover:text-orange-400 transition-colors group"
           >
             <span>Experience</span>
-            <ArrowDown class="size-4 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-y-0.5 transition-all" stroke-width={2.25} />
+            <ArrowDown class="size-4 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-700 dark:group-hover:text-orange-400 group-hover:translate-y-0.5 transition-all" stroke-width={2.25} />
           </a>
 
           <a
             href="#work"
-            class="inline-flex items-center gap-1.5 font-medium text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 transition-colors group"
+            class="inline-flex items-center gap-1.5 py-1 font-medium text-neutral-950 hover:text-orange-700 dark:text-white dark:hover:text-orange-400 transition-colors group"
           >
             <span>Projects</span>
-            <ArrowDown class="size-4 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-y-0.5 transition-all" stroke-width={2.25} />
+            <ArrowDown class="size-4 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-700 dark:group-hover:text-orange-400 group-hover:translate-y-0.5 transition-all" stroke-width={2.25} />
           </a>
 
           <a
             href="/blog"
-            class="inline-flex items-center gap-1.5 font-medium text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 transition-colors group"
+            class="inline-flex items-center gap-1.5 py-1 font-medium text-neutral-950 hover:text-orange-700 dark:text-white dark:hover:text-orange-400 transition-colors group"
           >
             <span>Blog</span>
-            <ArrowRight class="size-4 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 transition-all" stroke-width={2.25} />
+            <ArrowRight class="size-4 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-700 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 transition-all" stroke-width={2.25} />
           </a>
 
           <a
             href="#contact"
-            class="inline-flex items-center gap-1.5 font-medium text-neutral-950 hover:text-orange-600 dark:text-white dark:hover:text-orange-400 transition-colors group"
+            class="inline-flex items-center gap-1.5 py-1 font-medium text-neutral-950 hover:text-orange-700 dark:text-white dark:hover:text-orange-400 transition-colors group"
           >
             <span>Contact</span>
-            <ArrowDown class="size-4 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 group-hover:translate-y-0.5 transition-all" stroke-width={2.25} />
+            <ArrowDown class="size-4 text-neutral-500 dark:text-neutral-400 group-hover:text-orange-700 dark:group-hover:text-orange-400 group-hover:translate-y-0.5 transition-all" stroke-width={2.25} />
           </a>
 
           <button
             type="button"
             data-copy={personal.email}
-            class="inline-flex items-center gap-1.5 text-neutral-700 hover:text-orange-600 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors cursor-pointer group"
+            class="inline-flex items-center gap-1.5 py-1 text-neutral-700 hover:text-orange-700 dark:text-neutral-300 dark:hover:text-orange-400 transition-colors cursor-pointer group"
             title="Copy email to clipboard"
           >
             <span class="font-mono text-xs">{personal.email}</span>
@@ -89,6 +89,7 @@ import { ArrowDown, ArrowRight, Copy, Check } from "lucide-astro";
               height={210}
               quality={75}
               loading="eager"
+              fetchpriority="high"
               decoding="async"
               class="w-32 sm:w-40 h-auto object-contain filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.14)] dark:drop-shadow-[0_8px_20px_rgba(0,0,0,0.6)] transform hover:scale-105 transition-transform duration-300"
             />

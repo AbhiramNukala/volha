@@ -7,6 +7,10 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: "https://abhiramnukala.netlify.app",
+  build: {
+    inlineStylesheets: 'always',
+  },
+  compressHTML: true,
   integrations: [
     sitemap({
       changefreq: 'weekly',
